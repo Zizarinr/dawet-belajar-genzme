@@ -1,0 +1,357 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[indonesian]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+
+\definecolor{Navy}{HTML}{141F36}
+\definecolor{Blue}{HTML}{3166DC}
+\definecolor{Mint}{HTML}{43BEA4}
+\definecolor{Light}{HTML}{F5F7FB}
+\definecolor{CodeBG}{HTML}{1C212B}
+\definecolor{Gray}{HTML}{697180}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=Blue,
+    urlcolor=Blue
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{Navy}{DAWET}}
+\rhead{\textcolor{Gray}{Meeting 02}}
+\cfoot{\thepage}
+
+\titleformat{\section}{\Large\bfseries\color{Navy}}{}{0em}{}
+\titleformat{\subsection}{\large\bfseries\color{Blue}}{}{0em}{}
+
+\lstdefinestyle{htmlstyle}{
+    language=HTML,
+    basicstyle=\ttfamily\small\color{white},
+    backgroundcolor=\color{CodeBG},
+    keywordstyle=\color{Mint},
+    commentstyle=\color{Gray},
+    stringstyle=\color{yellow},
+    breaklines=true,
+    frame=none,
+    showstringspaces=false,
+    columns=fullflexible
+}
+
+\newtcolorbox{conceptbox}{
+    colback=Light,
+    colframe=Blue,
+    boxrule=0.7pt,
+    arc=3mm,
+    left=4mm,right=4mm,top=2mm,bottom=2mm
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\Huge\bfseries\color{Navy} DAWET\par}
+    \vspace{0.5cm}
+    {\Huge\bfseries\color{Blue} HTML dari Nol\par}
+    \vspace{0.7cm}
+    {\Large Meeting 02 — Modul Belajar Pemula\par}
+    \vspace{1.5cm}
+    \begin{tcolorbox}[colback=Light,colframe=Mint,arc=3mm]
+        \centering
+        Dari struktur HTML dasar menuju fondasi Portal UMKM Kampus.
+    \end{tcolorbox}
+    \vfill
+    {\large Study Club Web Development\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Tujuan Pembelajaran}
+
+Setelah menyelesaikan materi ini, peserta diharapkan mampu:
+
+\begin{enumerate}[label=\arabic*.]
+    \item Menjelaskan fungsi HTML dalam website.
+    \item Membedakan tag, element, dan attribute.
+    \item Membuat struktur dasar dokumen HTML.
+    \item Menggunakan heading, paragraph, list, link, dan image.
+    \item Membuat halaman profil UMKM sederhana.
+\end{enumerate}
+
+\section{Apa Itu HTML?}
+
+HTML adalah singkatan dari \textit{HyperText Markup Language}. HTML digunakan untuk menyusun struktur dan memberi makna pada konten halaman web.
+
+HTML bukan bahasa pemrograman seperti JavaScript atau Python. HTML merupakan \textit{markup language}, yaitu bahasa penanda yang memberi tahu browser tentang struktur sebuah dokumen.
+
+\begin{conceptbox}
+\textbf{Analogi sederhana}
+
+\begin{itemize}
+    \item HTML = struktur dan ruangan sebuah rumah.
+    \item CSS = warna, dekorasi, dan tampilan rumah.
+    \item JavaScript = interaksi dan perilaku di dalam rumah.
+\end{itemize}
+\end{conceptbox}
+
+\section{Tag, Element, dan Attribute}
+
+Perhatikan contoh berikut:
+
+\begin{lstlisting}[style=htmlstyle]
+<a href="https://example.com">Kunjungi website</a>
+\end{lstlisting}
+
+\subsection{Tag}
+
+Tag adalah penanda yang ditulis menggunakan tanda kurung sudut. Contohnya \texttt{<a>} sebagai tag pembuka dan \texttt{</a>} sebagai tag penutup.
+
+\subsection{Element}
+
+Element adalah keseluruhan bagian HTML yang terdiri dari tag pembuka, isi, dan tag penutup.
+
+\subsection{Attribute}
+
+Attribute memberikan informasi tambahan pada sebuah tag. Pada contoh sebelumnya, \texttt{href} adalah attribute yang berisi alamat tujuan link.
+
+\section{Struktur Dasar HTML}
+
+Gunakan struktur berikut sebagai titik awal dokumen HTML:
+
+\begin{lstlisting}[style=htmlstyle]
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Halaman Saya</title>
+</head>
+<body>
+    <h1>Hello, DAWET!</h1>
+    <p>Ini halaman web pertama saya.</p>
+</body>
+</html>
+\end{lstlisting}
+
+\subsection{\texttt{<!DOCTYPE html>}}
+
+Deklarasi ini memberi tahu browser bahwa dokumen menggunakan HTML5.
+
+\subsection{\texttt{<html>}}
+
+Element utama yang membungkus seluruh dokumen HTML. Attribute \texttt{lang="id"} menunjukkan bahwa bahasa dokumen adalah bahasa Indonesia.
+
+\subsection{\texttt{<head>}}
+
+Bagian yang berisi informasi halaman, seperti judul, metadata, dan referensi file CSS.
+
+\subsection{\texttt{<body>}}
+
+Bagian yang berisi konten utama yang ditampilkan di halaman browser.
+
+\section{Heading dan Paragraph}
+
+Heading digunakan untuk judul atau subjudul. HTML menyediakan heading dari \texttt{h1} sampai \texttt{h6}.
+
+\begin{lstlisting}[style=htmlstyle]
+<h1>Warung Berkah</h1>
+<h2>Menu Favorit</h2>
+<p>Kami menyediakan makanan rumahan
+dengan harga bersahabat.</p>
+\end{lstlisting}
+
+Gunakan heading berdasarkan struktur dan tingkat kepentingan konten, bukan hanya untuk memperbesar ukuran teks.
+
+\section{List}
+
+HTML menyediakan dua jenis list yang umum digunakan.
+
+\subsection{Unordered List}
+
+\texttt{<ul>} digunakan untuk daftar yang tidak memiliki urutan khusus.
+
+\begin{lstlisting}[style=htmlstyle]
+<ul>
+    <li>Nasi Goreng</li>
+    <li>Mie Ayam</li>
+    <li>Es Teh</li>
+</ul>
+\end{lstlisting}
+
+\subsection{Ordered List}
+
+\texttt{<ol>} digunakan untuk daftar yang memiliki urutan.
+
+\begin{lstlisting}[style=htmlstyle]
+<ol>
+    <li>Pilih menu</li>
+    <li>Hubungi penjual</li>
+    <li>Konfirmasi pesanan</li>
+</ol>
+\end{lstlisting}
+
+Element \texttt{<li>} digunakan untuk setiap item dalam kedua jenis list tersebut.
+
+\section{Link dengan \texttt{<a>}}
+
+Element \texttt{<a>} digunakan untuk membuat link. Attribute \texttt{href} menentukan tujuan link.
+
+\begin{lstlisting}[style=htmlstyle]
+<a href="https://instagram.com/">
+    Instagram UMKM
+</a>
+\end{lstlisting}
+
+Link dapat digunakan untuk:
+
+\begin{itemize}
+    \item Mengarahkan pengunjung ke Instagram.
+    \item Mengarahkan pengunjung ke WhatsApp.
+    \item Membuka halaman lain.
+    \item Mengarah ke bagian tertentu dalam halaman.
+\end{itemize}
+
+\section{Gambar dengan \texttt{<img>}}
+
+Element \texttt{<img>} digunakan untuk menampilkan gambar.
+
+\begin{lstlisting}[style=htmlstyle]
+<img src="images/menu.jpg"
+     alt="Foto menu makanan">
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{src}: lokasi atau alamat file gambar.
+    \item \texttt{alt}: teks alternatif yang menjelaskan gambar.
+\end{itemize}
+
+Attribute \texttt{alt} penting untuk aksesibilitas dan membantu ketika gambar gagal dimuat.
+
+\section{Contoh Proyek: Profil UMKM}
+
+Buat file bernama \texttt{index.html}, lalu isi dengan contoh berikut:
+
+\begin{lstlisting}[style=htmlstyle]
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Warung Berkah</title>
+</head>
+<body>
+    <h1>Warung Berkah</h1>
+    <p>Makanan rumahan untuk mahasiswa.</p>
+
+    <h2>Menu</h2>
+    <ul>
+        <li>Nasi Goreng — Rp12.000</li>
+        <li>Es Teh — Rp4.000</li>
+    </ul>
+
+    <a href="https://wa.me/628123456789">
+        Hubungi via WhatsApp
+    </a>
+</body>
+</html>
+\end{lstlisting}
+
+Cobalah mengganti nama UMKM, deskripsi, menu, harga, dan link kontak dengan data UMKM pilihanmu.
+
+\section{Praktik Mandiri}
+
+\subsection{Persiapan Folder}
+
+Buat struktur folder berikut:
+
+\begin{lstlisting}[style=htmlstyle]
+DAWET/
+└── minggu-02/
+    └── index.html
+\end{lstlisting}
+
+\subsection{Tugas Utama}
+
+Buat halaman profil UMKM dengan ketentuan:
+
+\begin{enumerate}[label=\arabic*.]
+    \item Memiliki satu judul utama menggunakan \texttt{h1}.
+    \item Memiliki deskripsi singkat menggunakan \texttt{p}.
+    \item Memiliki minimal tiga menu menggunakan \texttt{ul} dan \texttt{li}.
+    \item Memiliki satu gambar menggunakan \texttt{img} dan \texttt{alt}.
+    \item Memiliki satu link kontak menggunakan \texttt{a} dan \texttt{href}.
+    \item Memiliki struktur \texttt{html}, \texttt{head}, dan \texttt{body}.
+\end{enumerate}
+
+\subsection{Tantangan Tambahan}
+
+Jika tugas utama sudah selesai, tambahkan:
+
+\begin{itemize}
+    \item Link Instagram.
+    \item Daftar langkah pemesanan menggunakan \texttt{ol}.
+    \item Harga untuk setiap menu.
+    \item Komentar HTML untuk menandai bagian kode.
+    \item Judul halaman yang sesuai pada element \texttt{title}.
+\end{itemize}
+
+\section{Checkpoint Pemahaman}
+
+Coba jawab pertanyaan berikut menggunakan bahasamu sendiri:
+
+\begin{enumerate}[label=\arabic*.]
+    \item Apa fungsi HTML?
+    \item Apa perbedaan tag, element, dan attribute?
+    \item Apa fungsi \texttt{href} dan \texttt{src}?
+    \item Kapan kita menggunakan \texttt{ul} dan kapan menggunakan \texttt{ol}?
+    \item Apa perbedaan \texttt{head} dan \texttt{body}?
+    \item Mengapa gambar sebaiknya memiliki attribute \texttt{alt}?
+\end{enumerate}
+
+\section{Tugas GitHub dan README}
+
+Simpan proyek pada repository GitHub pribadi. Tambahkan README sederhana yang berisi:
+
+\begin{itemize}
+    \item Nama dan identitas.
+    \item Judul proyek.
+    \item Deskripsi singkat.
+    \item Teknologi yang digunakan.
+    \item Hal yang dipelajari.
+    \item Kendala dan solusi.
+    \item Screenshot hasil halaman.
+\end{itemize}
+
+\section{Referensi}
+
+\begin{enumerate}
+    \item MDN Web Docs — Basic HTML Syntax:
+    \url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax}
+    \item MDN Web Docs — HTML Elements Reference:
+    \url{https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements}
+    \item W3C Markup Validation Service:
+    \url{https://validator.w3.org/}
+\end{enumerate}
+
+\section{Penutup}
+
+Jangan berfokus pada menghafal semua tag HTML sekaligus. Fokus utama pada sesi ini adalah memahami struktur dokumen dan mampu membuat halaman sederhana dari nol.
+
+\begin{conceptbox}
+\centering
+\textbf{Satu halaman hari ini. Satu website besok.}
+
+Mulai dari struktur kecil, bangun proyek yang nyata.
+\end{conceptbox}
+
+\end{document}
