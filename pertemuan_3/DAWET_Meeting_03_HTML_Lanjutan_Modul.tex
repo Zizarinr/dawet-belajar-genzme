@@ -1,0 +1,246 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[indonesian]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\definecolor{Navy}{HTML}{141F36}
+\definecolor{Blue}{HTML}{3166DC}
+\definecolor{Mint}{HTML}{43BEA4}
+\definecolor{Light}{HTML}{F5F7FB}
+\definecolor{CodeBG}{HTML}{1C212B}
+\definecolor{Gray}{HTML}{697180}
+\hypersetup{colorlinks=true,linkcolor=Blue,urlcolor=Blue}
+\pagestyle{fancy}\fancyhf{}\lhead{\textcolor{Navy}{DAWET}}\rhead{\textcolor{Gray}{Meeting 03}}\cfoot{\thepage}
+\titleformat{\section}{\Large\bfseries\color{Navy}}{}{0em}{}
+\titleformat{\subsection}{\large\bfseries\color{Blue}}{}{0em}{}
+\lstdefinestyle{htmlstyle}{language=HTML,basicstyle=\ttfamily\small\color{white},backgroundcolor=\color{CodeBG},keywordstyle=\color{Mint},commentstyle=\color{Gray},stringstyle=\color{yellow},breaklines=true,frame=none,showstringspaces=false,columns=fullflexible}
+\newtcolorbox{conceptbox}{colback=Light,colframe=Blue,boxrule=0.7pt,arc=3mm,left=4mm,right=4mm,top=2mm,bottom=2mm}
+\begin{document}
+\begin{titlepage}\centering\vspace*{2.7cm}{\Huge\bfseries\color{Navy} DAWET\par}\vspace{.5cm}{\Huge\bfseries\color{Blue} HTML Lanjutan\par}\vspace{.7cm}{\Large Meeting 03 — Modul Belajar Pemula\par}\vspace{1.4cm}\begin{tcolorbox}[colback=Light,colframe=Mint,arc=3mm]\centering Dari satu dokumen HTML menjadi website kecil yang saling terhubung.\end{tcolorbox}\vfill{\large Study Club Web Development\par}\end{titlepage}
+\tableofcontents\newpage
+\section{Pengantar: Dari Satu Halaman Menjadi Website}
+Pada pertemuan sebelumnya, kita sudah membuat sebuah dokumen HTML yang cukup lengkap. Kita sudah menggunakan struktur dasar HTML, teks, gambar, list, tabel, serta bagian \texttt{header}, \texttt{main}, dan \texttt{footer}.
+\begin{conceptbox}\textbf{Pertanyaan berikutnya:} Kalau sebuah website memiliki banyak informasi, apakah semuanya harus dimasukkan ke satu file HTML?
+\end{conceptbox}
+Tidak harus. Sebuah website dapat terdiri dari beberapa halaman HTML. Website UMKM, misalnya, dapat memiliki halaman Home, Tentang, Produk, dan Kontak. Setiap halaman dapat dibuat sebagai file HTML yang berbeda.
+Agar pengunjung dapat berpindah dari satu halaman ke halaman lain, kita membutuhkan \textbf{link}.
+\subsection{Mengapa Link Dipelajari Sekarang?}
+Pada Week 2 kita sudah menggunakan attribute seperti \texttt{src} pada gambar:
+\begin{lstlisting}[style=htmlstyle]<img src="img1.jpg" alt="Foto produk">\end{lstlisting}
+\texttt{src} memberi tahu browser lokasi file yang dibutuhkan. Konsep yang mirip muncul pada \texttt{href}. Pada element \texttt{<a>}, \texttt{href} menentukan tujuan link.
+\begin{lstlisting}[style=htmlstyle]<a href="tentang.html">Tentang Kami</a>\end{lstlisting}
+Jadi kita sedang memperluas konsep yang sudah dikenal: \textbf{attribute dan path}.
+\subsection{Dari File ke Website}
+Misalnya:
+\begin{lstlisting}[style=htmlstyle]
+portal-umkm/
+├── index.html
+├── tentang.html
+├── produk.html
+└── kontak.
+\end{lstlisting}
+File-file tersebut perlu dihubungkan. Kumpulan link dapat menjadi navigasi:
+\begin{lstlisting}[style=htmlstyle]
+<a href="index.html">Home</a>
+<a href="tentang.html">Tentang</a>
+<a href="produk.html">Produk</a>
+<a href="kontak.html">Kontak</a>
+\end{lstlisting}
+\subsection{Mengapa Semantic HTML Ikut Dibahas?}
+Ketika halaman dan konten bertambah, struktur HTML perlu tetap jelas. Kita sudah menggunakan \texttt{header}, \texttt{main}, dan \texttt{footer}; sekarang kita menambahkan \texttt{nav}, \texttt{section}, dan pengenalan singkat \texttt{article}.
+Tujuannya bukan membuat halaman langsung cantik. Tampilan akan menjadi fokus saat CSS dipelajari. Tujuan sekarang adalah membuat HTML dengan struktur dan makna yang jelas.
+
+\section{Tujuan Pembelajaran}
+\begin{enumerate}[label=\arabic*.]
+\item Menjelaskan fungsi hyperlink.
+\item Membuat link ke website lain.
+\item Membuat link antar halaman HTML.
+\item Memahami relative path sederhana.
+\item Membuat navigasi dengan \texttt{nav}.
+\item Memahami dasar \texttt{section} dan \texttt{article}.
+\item Membuat website sederhana multi-page.
+\end{enumerate}
+
+\section{Hyperlink dengan \texttt{<a>}}
+\begin{lstlisting}[style=htmlstyle]
+<a href="https://www.instagram.com/">Instagram</a>
+\end{lstlisting}
+\texttt{href} menentukan tujuan link. Teks di antara tag pembuka dan penutup menjadi bagian yang dapat diklik.
+\subsection{Link Eksternal}
+\begin{lstlisting}[style=htmlstyle]
+<a href="https://www.instagram.com/">Instagram</a>
+<a href="https://maps.google.com/">Google Maps</a>
+\end{lstlisting}
+Link eksternal mengarah ke website lain dan biasanya menggunakan URL lengkap seperti \texttt{https://...}.
+
+\section{Link Antar Halaman}
+Misalnya:
+\begin{lstlisting}[style=htmlstyle]
+portal-umkm/
+├── index.html
+├── tentang.html
+├── produk.html
+└── kontak.html
+\end{lstlisting}
+Dari \texttt{index.html}:
+\begin{lstlisting}[style=htmlstyle]
+<a href="tentang.html">Tentang Kami</a>
+<a href="produk.html">Produk</a>
+<a href="kontak.html">Kontak</a>
+\end{lstlisting}
+Browser mencari file berdasarkan path relatif terhadap file HTML saat ini.
+
+\section{Relative Path}
+Konsep path pada link mirip dengan path gambar:
+\begin{lstlisting}[style=htmlstyle]
+<img src="images/menu.jpg" alt="Menu">
+<a href="pages/menu.html">Menu</a>
+\end{lstlisting}
+\begin{conceptbox}\textbf{Cara berpikir:} Dari file HTML ini, saya harus pergi ke file mana? Tuliskan path file tersebut pada \texttt{href}.
+\end{conceptbox}
+
+\section{Navigasi dengan \texttt{<nav>}}
+\begin{lstlisting}[style=htmlstyle]
+<nav>
+    <a href="index.html">Home</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="produk.html">Produk</a>
+    <a href="kontak.html">Kontak</a>
+</nav>
+\end{lstlisting}
+\texttt{nav} memberi makna bahwa kumpulan link tersebut merupakan navigasi. Tampilan visualnya akan kita atur dengan CSS.
+
+\section{Semantic HTML}
+Semantic HTML berarti menggunakan element berdasarkan \textbf{makna atau perannya}, bukan sekadar berdasarkan tampilannya.
+\subsection{\texttt{<header>}}Bagian pengantar atau kepala halaman/bagian.
+\subsection{\texttt{<nav>}}Bagian navigasi.
+\subsection{\texttt{<main>}}Konten utama halaman.
+\subsection{\texttt{<section>}}Kelompok konten dengan tema atau bagian tertentu.
+\subsection{\texttt{<article>}}Konten yang dapat dipandang sebagai unit tersendiri, misalnya artikel atau posting.
+\subsection{\texttt{<footer>}}Bagian penutup, misalnya copyright atau informasi tambahan.
+
+\section{Section dalam Halaman}
+\begin{lstlisting}[style=htmlstyle]
+<main>
+    <section>
+        <h2>Profil UMKM</h2>
+        <p>...</p>
+    </section>
+    <section>
+        <h2>Menu Produk</h2>
+        <p>...</p>
+    </section>
+    <section>
+        <h2>Promo</h2>
+        <p>...</p>
+    </section>
+</main>
+\end{lstlisting}
+
+\section{Membangun Website Multi-page}
+Target:
+\begin{lstlisting}[style=htmlstyle]
+portal-umkm/
+├── index.html
+├── tentang.html
+├── produk.html
+├── kontak.html
+└── images/
+    └── logo.jpg
+\end{lstlisting}
+Contoh Home:
+\begin{lstlisting}[style=htmlstyle]
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung Berkah</title>
+</head>
+<body>
+<header>
+    <h1>Warung Berkah</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tentang.html">Tentang</a>
+        <a href="produk.html">Produk</a>
+        <a href="kontak.html">Kontak</a>
+    </nav>
+</header>
+<main>
+    <section>
+        <h2>Selamat Datang</h2>
+        <p>Makanan rumahan untuk mahasiswa.</p>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2026 Warung Berkah</p>
+</footer>
+</body>
+</html>
+\end{lstlisting}
+
+\section{Praktik Mandiri}
+Kembangkan halaman Week 2 menjadi website kecil. Minimal buat Home, Tentang, dan Produk.
+\subsection{Ketentuan}
+\begin{itemize}
+\item Minimal tiga file HTML.
+\item Struktur dasar pada setiap halaman.
+\item Navigasi yang menghubungkan halaman.
+\item Minimal satu link eksternal.
+\item Penggunaan \texttt{header}, \texttt{nav}, \texttt{main}, \texttt{section}, dan \texttt{footer} secara masuk akal.
+\item Minimal satu gambar.
+\end{itemize}
+\subsection{Bonus}
+Tambahkan halaman Kontak, Google Maps, Instagram/WhatsApp, folder gambar yang rapi, dan \texttt{article} untuk konten mandiri.
+
+\section{Checkpoint Pemahaman}
+\begin{enumerate}
+\item Apa perbedaan link eksternal dan internal?
+\item Apa fungsi \texttt{href}?
+\item Mengapa path \texttt{href} mirip dengan \texttt{src}?
+\item Mengapa kumpulan link navigasi dibungkus dengan \texttt{nav}?
+\item Apa fungsi \texttt{section}?
+\item Kapan \texttt{article} masuk akal digunakan?
+\item Apa yang dimaksud semantic HTML?
+\end{enumerate}
+
+\section{Tugas GitHub}
+Simpan:
+\begin{lstlisting}[style=htmlstyle]
+DAWET/
+└── minggu-03/
+    └── portal-umkm/
+        ├── index.html
+        ├── tentang.html
+        ├── produk.html
+        ├── kontak.html
+        └── images/
+\end{lstlisting}
+Lakukan commit dan push. README berisi struktur halaman, link, semantic element, kendala, hal baru, dan screenshot.
+
+\section{Persiapan Menuju CSS}
+Pada tahap ini website mungkin masih terlihat sederhana. Itu normal. HTML terutama menyusun struktur dan makna konten. CSS nantinya mengatur warna, ukuran teks, jarak, border, layout, dan tampilan halaman.
+\begin{conceptbox}\textbf{Jangan terlalu sibuk mempercantik HTML.} Kita akan belajar cara yang lebih tepat melalui CSS.
+\end{conceptbox}
+
+\section{Referensi}
+\begin{enumerate}
+\item MDN — Anchor Element: \url{https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a}
+\item MDN — nav: \url{https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav}
+\item MDN — Semantics: \url{https://developer.mozilla.org/en-US/docs/Glossary/Semantics}
+\end{enumerate}
+
+\section{Penutup}
+Week 2: membuat dokumen HTML. Week 3: membuat sekumpulan halaman yang saling terhubung.
+\begin{center}\textbf{Elemen HTML $\rightarrow$ Struktur halaman $\rightarrow$ Link $\rightarrow$ Multi-page website}\end{center}
+\begin{conceptbox}\centering\textbf{HTML memberi kita struktur.}\\CSS akan memberi kita tampilan.\end{conceptbox}
+\end{document}
