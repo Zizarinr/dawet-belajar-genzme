@@ -1,0 +1,438 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{xcolor,hyperref,listings,enumitem,tcolorbox,titlesec,parskip}
+\definecolor{Blue}{HTML}{2563EB}
+\definecolor{Dark}{HTML}{0F172A}
+\definecolor{CodeBG}{HTML}{F1F5F9}
+\hypersetup{colorlinks=true,linkcolor=Blue,urlcolor=Blue}
+\titleformat{\section}{\Large\bfseries\color{Dark}}{}{0em}{}
+\titleformat{\subsection}{\large\bfseries\color{Dark}}{}{0em}{}
+\lstset{backgroundcolor=\color{CodeBG},basicstyle=\ttfamily\small,frame=single,breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false}
+\newtcolorbox{ingat}{colback=blue!4,colframe=Blue,boxrule=.5pt,arc=2pt}
+\begin{document}
+\begin{center}
+{\Large\bfseries DAWET --- MODUL WEEK 04}\\[5pt]
+{\huge\bfseries CSS Dasar}\\[5pt]
+{\large Memahami fitur CSS, memilih fitur yang dipelajari, dan mempraktikkannya pada Portal UMKM}
+\end{center}
+
+\begin{ingat}
+Modul ini dibuat untuk pemula yang belum memiliki mentor atau expert. Kita tidak harus menguasai semua CSS dalam satu pertemuan. Tujuan kita adalah memahami gambaran besar CSS, menguasai fitur dasar, dan mampu mengubah tampilan HTML secara terarah.
+\end{ingat}
+\tableofcontents
+\newpage
+
+\section{Peta Belajar: CSS Bisa Melakukan Apa Saja?}
+CSS bukan hanya untuk memberi warna. CSS memiliki banyak kelompok kemampuan:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Warna dan latar belakang}: warna teks, warna latar, gambar latar, dan transparansi. Contoh: \texttt{color}, \texttt{background-color}.
+\item \textbf{Teks dan tipografi}: ukuran, jenis, ketebalan, perataan, dan jarak teks. Contoh: \texttt{font-size}, \texttt{font-family}, \texttt{text-align}.
+\item \textbf{Jarak dan kotak elemen}: ruang di dalam/luar elemen, garis batas, dan ukuran. Contoh: \texttt{padding}, \texttt{margin}, \texttt{border}, \texttt{width}.
+\item \textbf{Layout}: mengatur posisi dan susunan elemen. Contoh: Flexbox dan Grid.
+\item \textbf{Gambar dan media}: ukuran dan cara gambar memenuhi area. Contoh: \texttt{width}, \texttt{height}, \texttt{object-fit}.
+\item \textbf{Responsive design}: menyesuaikan tampilan untuk HP, tablet, dan komputer. Salah satu alatnya \texttt{@media}.
+\item \textbf{Border, sudut, dan bayangan}: kartu dan tombol dengan sudut membulat atau bayangan. Contoh: \texttt{border-radius}, \texttt{box-shadow}.
+\item \textbf{Efek dan animasi}: perubahan visual saat pointer diarahkan atau transisi halus. Contoh: \texttt{:hover}, \texttt{transition}, \texttt{@keyframes}.
+\item \textbf{Selector dan state}: memilih elemen berdasarkan tag, class, hubungan, atau keadaan. Contoh: \texttt{.card}, \texttt{\#judul}, \texttt{a:hover}.
+\item \textbf{Fitur lanjutan}: variabel CSS, pseudo-element, aturan prioritas, dan banyak fitur lainnya.
+\end{enumerate}
+
+\begin{ingat}
+Kita tidak mempelajari semuanya sekarang. Week 4 berfokus pada fitur yang paling mudah diamati dan sering dibutuhkan saat sebuah halaman HTML mulai diberi tampilan.
+\end{ingat}
+
+\section{Target Week 4}
+Setelah pertemuan ini, anggota diharapkan mampu:
+\begin{itemize}[leftmargin=*]
+\item menjelaskan perbedaan peran HTML dan CSS;
+\item membaca aturan dasar CSS;
+\item membuat \texttt{style.css} dan menghubungkannya ke HTML;
+\item menggunakan selector elemen, class, dan ID;
+\item mengatur warna, latar, font, dan perataan teks;
+\item memahami \texttt{margin}, \texttt{padding}, dan \texttt{border};
+\item mencoba perubahan dan memeriksa kesalahan sederhana.
+\end{itemize}
+Flexbox, Grid, responsive design, dan animasi sengaja ditunda agar dasar CSS tidak dipelajari terlalu terburu-buru.
+
+\section{Pengantar: HTML dan CSS Punya Tugas Berbeda}
+Bayangkan website seperti rumah. HTML adalah struktur dan bagian-bagian rumah; CSS adalah warna cat, jarak furnitur, dan penampilan ruang.
+
+\begin{itemize}[leftmargin=*]
+\item HTML menentukan \textit{apa} yang ada di halaman.
+\item CSS menentukan \textit{bagaimana} elemen terlihat.
+\item JavaScript nantinya menentukan \textit{apa yang terjadi} saat pengguna berinteraksi.
+\end{itemize}
+
+Contoh HTML:
+\begin{lstlisting}[language=HTML]
+<h1>Warung Bu Sari</h1>
+<p>Menjual makanan rumahan.</p>
+\end{lstlisting}
+HTML ini sudah punya judul dan paragraf. CSS dapat mengubah warna dan ukuran judul tanpa mengganti isi kalimat.
+
+\section{Modul 1 --- Cara Kerja CSS}
+Pola dasar CSS:
+\begin{lstlisting}
+p {
+    color: blue;
+    font-size: 18px;
+}
+\end{lstlisting}
+Cara membacanya:
+\begin{itemize}[leftmargin=*]
+\item \texttt{p} adalah \textbf{selector}: elemen yang dipilih.
+\item \texttt{color} dan \texttt{font-size} adalah \textbf{property}: aspek tampilan yang diubah.
+\item \texttt{blue} dan \texttt{18px} adalah \textbf{value}: nilai yang diberikan.
+\item Kurung kurawal membatasi aturan untuk selector.
+\item Titik koma mengakhiri satu deklarasi CSS.
+\end{itemize}
+Baca kode dengan tiga pertanyaan: elemen mana yang dipilih, aspek apa yang diubah, dan nilainya apa?
+
+\section{Modul 2 --- Tiga Cara Menambahkan CSS}
+\subsection{A. Inline CSS}
+CSS ditulis langsung pada atribut \texttt{style}:
+\begin{lstlisting}[language=HTML]
+<p style="color: red;">Halo, DAWET!</p>
+\end{lstlisting}
+Cepat untuk percobaan kecil, tetapi kurang nyaman jika banyak elemen memerlukan style yang sama.
+
+\subsection{B. Internal CSS}
+CSS ditulis di dalam tag \texttt{style}, biasanya pada bagian \texttt{head}:
+\begin{lstlisting}[language=HTML]
+<head>
+    <style>
+        p { color: red; }
+    </style>
+</head>
+\end{lstlisting}
+Aturan tersebut berada di satu halaman. Jika ada banyak halaman, kita bisa terpaksa menyalin aturan yang sama ke setiap file.
+
+\subsection{C. External CSS}
+CSS disimpan pada file terpisah bernama \texttt{style.css}. HTML menghubungkannya melalui tag \texttt{link}:
+\begin{lstlisting}[language=HTML]
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal UMKM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+\end{lstlisting}
+\begin{ingat}
+Untuk project DAWET, utamakan \textbf{external CSS}. Satu file \texttt{style.css} dapat dipakai oleh beberapa halaman. Jika ingin mengubah warna atau font, kita cukup memperbarui file tersebut.
+\end{ingat}
+
+\subsection{Memahami path CSS}
+Atribut \texttt{href} menunjukkan lokasi file CSS. Jika HTML dan CSS berada di folder yang sama, tulis \texttt{style.css}. Ini mirip dengan path gambar dan link HTML pada pertemuan sebelumnya.
+\begin{lstlisting}
+portal-umkm/
+|-- index.html
+|-- tentang.html
+|-- produk.html
+|-- kontak.html
+`-- style.css
+\end{lstlisting}
+Jika CSS disimpan dalam folder \texttt{css}, gunakan \texttt{css/style.css}. Path harus sesuai dengan struktur folder sebenarnya.
+
+\section{Modul 3 --- Selector: Memilih Elemen}
+Selector memberi tahu CSS elemen mana yang akan diatur. Untuk Week 4, kuasai tiga jenis.
+
+\subsection{A. Element selector}
+Memilih elemen berdasarkan tag HTML:
+\begin{lstlisting}
+p {
+    color: #334155;
+}
+\end{lstlisting}
+Aturan ini berlaku pada semua paragraf yang cocok di halaman.
+
+\subsection{B. Class selector}
+Class adalah label yang dipasang pada elemen. Di CSS, nama class diawali titik.
+\begin{lstlisting}[language=HTML]
+<div class="kartu-produk">
+    <h2>Roti Bakar</h2>
+    <p>Roti bakar cokelat keju.</p>
+</div>
+<div class="kartu-produk">
+    <h2>Es Teh</h2>
+    <p>Minuman segar.</p>
+</div>
+\end{lstlisting}
+\begin{lstlisting}
+.kartu-produk {
+    background-color: white;
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+}
+\end{lstlisting}
+Kedua elemen memakai class yang sama, sehingga dapat memakai aturan yang sama. Ini membuat class cocok untuk kartu produk, tombol, label harga, dan komponen berulang.
+
+\subsection{C. ID selector}
+ID adalah penanda untuk elemen tertentu. Di CSS, nama ID diawali tanda pagar.
+\begin{lstlisting}[language=HTML]
+<h1 id="judul-utama">Portal UMKM Kampus</h1>
+\end{lstlisting}
+\begin{lstlisting}
+#judul-utama {
+    color: #1d4ed8;
+}
+\end{lstlisting}
+Sebagai kebiasaan, gunakan ID untuk penanda unik dan class untuk gaya yang mungkin digunakan berulang kali.
+
+\begin{ingat}
+\texttt{p} memilih tag paragraf. \texttt{.kartu-produk} memilih elemen dengan class tersebut. \texttt{\#judul-utama} memilih elemen dengan ID tersebut. Titik dan tanda pagar dipakai di selector CSS, bukan di nilai atribut HTML.
+\end{ingat}
+
+\section{Modul 4 --- Warna dan Latar Belakang}
+\subsection{\texttt{color}}
+Mengatur warna teks:
+\begin{lstlisting}
+h1 {
+    color: navy;
+}
+\end{lstlisting}
+\subsection{\texttt{background-color}}
+Mengatur warna latar elemen:
+\begin{lstlisting}
+body {
+    background-color: #f8fafc;
+}
+\end{lstlisting}
+Warna dapat ditulis dengan nama seperti \texttt{navy} atau format HEX seperti \texttt{\#2563eb}. Untuk awal, nama warna dan HEX sudah cukup.
+\begin{lstlisting}
+body {
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+h1 {
+    color: #1d4ed8;
+}
+\end{lstlisting}
+Ubah satu nilai warna, simpan file, lalu muat ulang halaman agar efeknya terlihat.
+
+\section{Modul 5 --- Teks dan Tipografi}
+\subsection{\texttt{font-size}}
+Mengatur ukuran teks:
+\begin{lstlisting}
+h1 {
+    font-size: 32px;
+}
+\end{lstlisting}
+\subsection{\texttt{font-family}}
+Mengatur jenis font:
+\begin{lstlisting}
+body {
+    font-family: Arial, sans-serif;
+}
+\end{lstlisting}
+Nama setelah koma merupakan pilihan cadangan jika font sebelumnya tidak tersedia.
+\subsection{\texttt{text-align}}
+Mengatur perataan teks. Nilai umum: \texttt{left}, \texttt{center}, dan \texttt{right}.
+\begin{lstlisting}
+h1 {
+    font-size: 32px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #1d4ed8;
+}
+\end{lstlisting}
+Satu selector dapat berisi beberapa deklarasi; setiap deklarasi mengatur aspek yang berbeda.
+
+\section{Modul 6 --- Margin, Padding, dan Border}
+Bagian ini penting karena halaman bisa terasa terlalu rapat bukan hanya karena warna, melainkan karena jarak yang kurang tepat.
+
+\subsection{\texttt{padding}: ruang di dalam}
+Padding adalah ruang antara isi elemen dan batasnya:
+\begin{lstlisting}
+.kartu-produk {
+    padding: 16px;
+}
+\end{lstlisting}
+\texttt{16px} memberi ruang agar teks tidak menempel pada pinggir kartu.
+
+\subsection{\texttt{border}: batas elemen}
+\begin{lstlisting}
+.kartu-produk {
+    border: 1px solid #cbd5e1;
+}
+\end{lstlisting}
+Di sini \texttt{1px} adalah ketebalan, \texttt{solid} jenis garis, dan nilai HEX adalah warna.
+
+\subsection{\texttt{margin}: ruang di luar}
+\begin{lstlisting}
+.kartu-produk {
+    margin: 12px 0;
+}
+\end{lstlisting}
+Dua nilai berarti margin atas-bawah sebesar \texttt{12px}, sedangkan kiri-kanan sebesar \texttt{0}.
+
+\subsection{Box model}
+Bayangkan setiap elemen sebagai kotak:
+\begin{center}
+\textbf{Isi elemen $\rightarrow$ padding $\rightarrow$ border $\rightarrow$ margin}
+\end{center}
+Isi adalah teks atau konten. Padding memberi ruang di dalam, border menjadi batas, dan margin memberi jarak dari elemen lain.
+\begin{ingat}
+Teks terlalu menempel pada tepi? Periksa \texttt{padding}. Dua kartu terlalu berdekatan? Periksa \texttt{margin}. Batas kartu tidak terlihat? Periksa \texttt{border}.
+\end{ingat}
+
+\section{Modul 7 --- Ukuran Elemen dan Gambar}
+\texttt{width} mengatur lebar dan \texttt{height} mengatur tinggi.
+\begin{lstlisting}
+.logo {
+    width: 120px;
+    height: 120px;
+}
+\end{lstlisting}
+Ukuran gambar yang sebelumnya ditulis langsung di HTML dapat dipindahkan ke CSS.
+\begin{lstlisting}[language=HTML]
+<img class="foto-produk" src="images/roti.jpg" alt="Roti bakar">
+\end{lstlisting}
+\begin{lstlisting}
+.foto-produk {
+    width: 240px;
+    height: 180px;
+}
+\end{lstlisting}
+Jika rasio lebar dan tinggi berbeda dari gambar asli, gambar bisa tampak melebar atau gepeng. Untuk saat ini, coba ukuran yang masuk akal. Properti \texttt{object-fit} dapat dipelajari ketika diperlukan.
+
+\section{Modul 8 --- Styling Navigasi}
+Week 3 sudah memakai \texttt{nav} dan link \texttt{a}. CSS dapat memilih link di dalam navigasi:
+\begin{lstlisting}
+nav a {
+    color: #1d4ed8;
+    text-decoration: none;
+}
+\end{lstlisting}
+Selector \texttt{nav a} berarti elemen \texttt{a} yang berada di dalam elemen \texttt{nav}. \texttt{text-decoration: none} menghilangkan garis bawah link.
+\begin{lstlisting}
+nav a {
+    margin-right: 12px;
+}
+\end{lstlisting}
+Jika link belum berjajar seperti menu modern, itu wajar. Mengatur layout menu dengan Flexbox adalah materi berikutnya.
+
+\section{Praktik Terpandu: Dari HTML Polos ke CSS}
+\subsection{Langkah 1 --- Gunakan project Week 3}
+Buka project lama. Jangan mulai dari nol jika project sebelumnya masih bisa digunakan.
+
+\subsection{Langkah 2 --- Buat file CSS}
+Buat file \texttt{style.css} satu folder dengan \texttt{index.html}. Pastikan nama file bukan \texttt{style.css.txt}.
+
+\subsection{Langkah 3 --- Hubungkan CSS}
+Tambahkan di dalam tag \texttt{head} setiap halaman yang ingin diberi style:
+\begin{lstlisting}[language=HTML]
+<link rel="stylesheet" href="style.css">
+\end{lstlisting}
+
+\subsection{Langkah 4 --- Ketik CSS pertama}
+Masukkan ke \texttt{style.css}:
+\begin{lstlisting}
+body {
+    font-family: Arial, sans-serif;
+    color: #1e293b;
+    background-color: #f8fafc;
+}
+h1 {
+    color: #1d4ed8;
+}
+p {
+    font-size: 16px;
+}
+\end{lstlisting}
+Simpan file, buka atau muat ulang HTML, lalu amati perubahannya.
+
+\subsection{Langkah 5 --- Tambahkan kartu produk}
+HTML:
+\begin{lstlisting}[language=HTML]
+<div class="kartu-produk">
+    <h2>Roti Bakar</h2>
+    <p>Roti bakar cokelat keju.</p>
+    <p>Rp10.000</p>
+</div>
+\end{lstlisting}
+CSS:
+\begin{lstlisting}
+.kartu-produk {
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    padding: 16px;
+    margin: 12px 0;
+}
+\end{lstlisting}
+Jika ada beberapa kartu dengan class sama, semuanya akan menerima aturan tersebut.
+
+\subsection{Langkah 6 --- Beri gaya pada navigasi}
+\begin{lstlisting}
+nav a {
+    color: #1d4ed8;
+    text-decoration: none;
+    margin-right: 12px;
+}
+\end{lstlisting}
+
+\subsection{Langkah 7 --- Eksperimen satu perubahan}
+Ubah \texttt{padding: 16px} menjadi \texttt{padding: 28px}, simpan, dan amati. Ubah satu hal dalam satu waktu supaya kita tahu property mana yang menyebabkan perubahan.
+
+\section{Jika CSS Tidak Berhasil}
+Pemula tidak perlu langsung tahu semua jawaban. Periksa secara berurutan:
+\begin{enumerate}[leftmargin=*]
+\item Apakah file sudah disimpan?
+\item Apakah browser sudah di-refresh?
+\item Apakah nama file benar-benar \texttt{style.css}?
+\item Apakah path pada \texttt{href} sesuai lokasi file?
+\item Apakah selector cocok dengan HTML? Jika CSS menulis \texttt{.kartu-produk}, HTML perlu \texttt{class="kartu-produk"}.
+\item Apakah kurung kurawal, titik dua, dan titik koma sudah benar?
+\item Coba satu perubahan kecil, jangan ubah banyak hal sekaligus.
+\end{enumerate}
+Contoh kesalahan: HTML memakai \texttt{class="kartu-produk"}, tetapi CSS memilih \texttt{.card}. Aturannya tidak cocok karena nama class berbeda.
+
+\section{Checkpoint}
+\begin{itemize}[leftmargin=*]
+\item[$\square$] Saya bisa menjelaskan perbedaan HTML dan CSS.
+\item[$\square$] Saya paham selector, property, dan value.
+\item[$\square$] Saya bisa membuat dan menghubungkan \texttt{style.css}.
+\item[$\square$] Saya bisa membedakan selector tag, class, dan ID.
+\item[$\square$] Saya bisa mengubah warna, latar, ukuran, dan perataan teks.
+\item[$\square$] Saya bisa menjelaskan perbedaan margin dan padding.
+\item[$\square$] Saya bisa memakai border.
+\item[$\square$] Saya bisa menemukan setidaknya satu kesalahan CSS sederhana.
+\end{itemize}
+
+\section{Tugas Mandiri}
+Lanjutkan Portal UMKM dari Week 3:
+\begin{enumerate}[leftmargin=*]
+\item Hubungkan \texttt{style.css} ke halaman yang sudah dibuat.
+\item Tentukan dua atau tiga warna yang konsisten.
+\item Atur font dan ukuran judul/paragraf.
+\item Rapikan jarak dengan \texttt{margin} dan \texttt{padding}.
+\item Tambahkan border pada satu bagian yang sesuai.
+\item Gunakan satu class pada lebih dari satu elemen.
+\item Tulis di README: ``Apa yang berubah setelah menggunakan CSS?''
+\item Commit dan push ke GitHub.
+\end{enumerate}
+
+\section{Materi yang Sengaja Ditunda}
+Kita belum perlu menguasai seluruh CSS. Topik yang akan datang:
+\begin{itemize}[leftmargin=*]
+\item Flexbox dan Grid untuk layout;
+\item media query untuk responsive design;
+\item pseudo-class seperti \texttt{:hover} lebih lanjut;
+\item transisi dan animasi;
+\item variabel CSS dan aturan prioritas yang lebih mendalam.
+\end{itemize}
+Materi tersebut tetap penting, tetapi lebih mudah dipahami setelah fondasi CSS cukup kuat.
+
+\section{Referensi}
+\begin{itemize}[leftmargin=*]
+\item MDN Web Docs, CSS styling basics: \url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics}
+\item MDN Web Docs, CSS selectors: \url{https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors}
+\item MDN Web Docs, CSS box model: \url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Box_model}
+\end{itemize}
+\begin{center}
+\textit{Prinsip DAWET: pahami sedikit, praktikkan, amati hasilnya, lalu lanjutkan. Tidak harus langsung hafal semuanya.}
+\end{center}
+\end{document}
