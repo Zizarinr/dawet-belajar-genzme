@@ -1,21 +1,26 @@
 <!DOCTYPE html> 
 <html lang="en">
+
 <head> <!-- head fungsinya adalah untuk menyimpan informasi meta tentang dokumen HTML -->
     <meta charset="UTF-8"> <!-- keterangan bahwa dokumen menggunakan karakter UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- keterangan bahwa dokumen responsif -->
+
     <title>Ini Nyoba</title> <!-- judul dokumen -->
     <link rel="icon" href="img1.jpg"> <!-- ikon dokumen -->
+
+    <link rel="stylesheet" href="style.css"> <!-- link ke file CSS eksternal -->
 </head>
+
 <body> <!-- body fungsinya adalah untuk menyimpan konten utama dari dokumen HTML -->
     
     <header> <!-- header fungsinya adalah untuk menyimpan konten header dari dokumen HTML -->
         <h1>Ini Dokumen Nyoba!</h1>
-        <p>Apa daya lebih jago kang Ali...</p>
+        <p class="description">Apa daya lebih jago kang Ali...</p>
         <nav> <!-- nav fungsinya adalah untuk menyimpan konten navigasi dari dokumen HTML -->
-            <ul>
+            <ul class="menu">
                 <li><a href="info_pribadi.html">Info Pribadi</a></li> <!-- a fungsinya adalah untuk membuat link ke dokumen lain -->
                 <li><a href="contact.html">Kontak</a></li>
-                <li><a href="../pertemuan_1/index.html">Halaman html dari pertemuan 1</a></li> <!-- andaikan ingin mengambil halaman dari direktori sebelumnya -->
+                <li><a href="../../pertemuan_1/index.html">Halaman html dari pertemuan 1</a></li> <!-- andaikan ingin mengambil halaman dari direktori sebelumnya -->
             </ul>
         </nav>
         <hr>
@@ -23,8 +28,8 @@
 
     <main>
         <h3>I. Ini adalah bagian utama dari dokumen...</h3>
-        <p>Paragraf...</p>
-        <img src="img1.jpg" alt="PewDiePie" width="500px" height="500px"> <!-- gambar dengan lebar 500px dan tinggi 500px -->
+        <p class="dummy-text">Felix Arvid Ulf Kjellberg[a] (born 24 October 1989), known online as PewDiePie,[b] is a Swedish YouTuber. He is known for his gaming videos, satirical commentary, comedy-sketches and lifestyle vlogging. Kjellberg's popularity on YouTube and extensive media coverage have made him one of the most noted online personalities and content creators. Media coverage of him has called him a figurehead for YouTube, especially in the gaming genre. Kjellberg registered his YouTube channel "PewDiePie" in 2010, primarily posting Let's Play videos of horror and action video games. His channel gained a substantial following and was one of the fastest growing channels in 2012 and 2013, before becoming the most-subscribed on YouTube on 15 August 2013. From 29 December 2014 to 14 February 2017, Kjellberg's channel was also the most-viewed on the platform. After becoming the platform's most-popular creator, he diversified his content, shifting its focus from Let's Plays and began to frequently include vlogs, comedy shorts, formatted shows, and music videos. For its first foray into original programming as part of the relaunch of its subscription service, YouTube also enlisted Kjellberg to star in a reality web series titled Scare PewDiePie.</p>
+        <img class="foto-utama" src="img1.jpg" alt="PewDiePie"> <!-- gambar dengan lebar 500px dan tinggi 500px -->
         <br>
         <h3>II. P balap</h3>
         <p>Paragraf... | Ini nyoba buat list, Unordered List:</p>
@@ -33,6 +38,7 @@
             <li>Pilihan</li>
             <li>Pilihan</li>
          </ul>
+         <img class="kartu" src="giphy.gif" alt="Dank memer">
          <p>Ini nyoba buat list, Ordered List:</p>
          <ol type="I">
             <li>Pilihan urut</li>
@@ -41,7 +47,7 @@
          </ol>
          <h3>III. Ini nyoba buat tabel</h3>
          <p>Ini nyoba buat tabel, tabel ini berisi data no, skill, dan hobi:</p>
-         <table border="1"> <!-- Tabel untuk menampilkan data -->
+         <table class="table-sikil"> <!-- Tabel untuk menampilkan data -->
             <tr>
                 <th>No</th> <!-- th fungsinya adalah untuk menampilkan data header dari tabel -->
                 <th>Skill</th>

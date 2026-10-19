@@ -1,0 +1,70 @@
+
+/* Tampilan Umum */
+body {
+    background-color: #29a284; /* warna latar belakang halaman */
+    color: #030303; /* warna teks */  
+    font-family: Arial, sans-serif; /* jenis font */
+}
+
+/* Tampilan Teks dan in-page content */
+h1 {
+    color: #000000; /* warna teks untuk elemen h1 */
+    text-align: center; /* teks di tengah */
+}
+
+.description {
+    color: #000000; /* warna teks untuk elemen description */
+    text-align: center; /* teks di tengah */
+}
+
+.menu {
+    list-style-type: none; /* menghapus bullet pada list */
+    padding: 0; /* menghapus padding */
+    text-align: center; /* teks di tengah */
+}
+
+.menu li {
+    display: inline-block; /* menampilkan item menu secara horizontal */
+    margin: 0 10px; /* margin horizontal antar item menu */
+}
+
+.menu a {
+    text-decoration: none; /* menghapus garis bawah pada link */
+    color: #0f47af; /* warna teks untuk link */
+    font-weight: bold; /* teks tebal */
+}
+
+.dummy-text {
+    color: #000000; /* warna teks untuk elemen dummy-text */
+    text-align: left; /* teks di kiri */
+    margin-top: 16px; /* margin atas */
+    line-height: 1.5; /* jarak antar baris */
+}
+
+.foto-utama { /* nyang pewdiepie */
+    width: 500px; /* lebar gambar */
+    height: 500px; /* tinggi gambar */
+    display: block; /* menampilkan gambar sebagai blok */
+    margin: 16px auto; /* mengatur margin otomatis untuk memusatkan gambar */
+}
+
+.kartu { /* nyang kungfu panda */
+    border: 2px solid #000000; /* border untuk gambar */
+    margin: 16px auto; /* mengatur margin otomatis untuk memusatkan gambar */
+    padding: 8px; /* padding di sekitar gambar */
+    display: block; /* menampilkan gambar sebagai blok */
+    width: max-content; /* lebar gambar */
+}
+
+.table-sikil {
+    border-collapse: collapse; /* menggabungkan border tabel */
+    width: 95%; /* lebar tabel */
+    margin: auto; /* mengatur margin otomatis */
+    margin-top: 16px; /* margin atas tabel */
+}
+
+.table-sikil th, .table-sikil td {
+    border: 1px solid #000000; /* border untuk sel tabel */
+    padding: 8px; /* padding untuk sel tabel */
+    text-align: left; /* teks rata kiri */
+}
