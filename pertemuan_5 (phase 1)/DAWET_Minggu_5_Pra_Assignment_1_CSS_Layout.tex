@@ -1,0 +1,227 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{xcolor,listings,enumitem,booktabs,hyperref,parskip}
+\definecolor{dawetblue}{HTML}{16324F}
+\definecolor{codebg}{HTML}{F1F4F7}
+\lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{codebg},frame=single,breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false}
+\hypersetup{colorlinks=true,linkcolor=dawetblue,urlcolor=dawetblue}
+\title{\textcolor{dawetblue}{\textbf{PROJECT DAWET}}\\[.4em]\Large Minggu 5 -- Pra-Assignment 1\\[.3em]\large CSS Layout: Flexbox dan Grid}
+\author{Materi Lanjutan HTML \& CSS}
+\date{Fase 1 -- Web Foundation}
+\begin{document}
+\maketitle
+\begin{center}\textit{Learn. Build. Understand.}\end{center}
+\section{Tujuan Pembelajaran}
+Setelah mempelajari materi ini, peserta diharapkan mampu:
+\begin{itemize}[nosep]
+\item Menjelaskan alasan penggunaan CSS Layout.
+\item Memahami container (elemen induk) dan item (elemen anak).
+\item Mengatur elemen satu arah menggunakan Flexbox.
+\item Menyusun elemen dalam baris dan kolom menggunakan CSS Grid.
+\item Memilih teknik layout sesuai kebutuhan halaman web.
+\item Menerapkan Flexbox dan Grid pada proyek HTML sederhana.
+\end{itemize}
+\section{Pengantar CSS Layout}
+HTML digunakan untuk membangun struktur halaman, sedangkan CSS digunakan untuk mengatur tampilannya. Ketika halaman semakin kompleks, kita perlu mengatur posisi dan susunan elemen secara lebih terarah.
+Contohnya, sebuah header dapat memiliki logo di sebelah kiri, menu navigasi di tengah, dan tombol login di sebelah kanan. CSS Layout membantu menentukan bagaimana elemen-elemen tersebut ditempatkan dan didistribusikan.
+\textbf{CSS Layout} adalah pendekatan dalam CSS untuk mengatur bagaimana elemen HTML disusun, ditempatkan, dan menggunakan ruang di dalam halaman.
+\textbf{Flexbox} dirancang untuk mengatur elemen dalam satu dimensi, yaitu baris atau kolom. \textbf{CSS Grid} dirancang untuk mengatur elemen dalam dua dimensi, yaitu baris dan kolom sekaligus.
+\section{Memahami Container dan Item}
+\textbf{Container} adalah elemen induk yang menjadi tempat berkumpulnya elemen lain. \textbf{Item} adalah elemen anak yang berada di dalam container.
+\begin{lstlisting}[language=HTML]
+<div class="container">
+    <div class="item">Satu</div>
+    <div class="item">Dua</div>
+    <div class="item">Tiga</div>
+</div>
+\end{lstlisting}
+Pada contoh tersebut, container adalah induk, sedangkan tiga elemen item adalah anak. Ketika Flexbox atau Grid diterapkan pada container, item di dalamnya mengikuti aturan layout yang ditentukan.
+\section{Flexbox}
+Flexbox (Flexible Box Layout) adalah sistem layout CSS untuk menyusun item dalam satu arah: horizontal (baris) atau vertikal (kolom).
+\subsection{Mengaktifkan Flexbox}
+\begin{lstlisting}[language=CSS]
+.container {
+    display: flex;
+}
+\end{lstlisting}
+Properti \texttt{display: flex} mengaktifkan Flexbox pada container. Secara default, item disusun dalam satu baris.
+\subsection{Mengatur arah item dengan flex-direction}
+\begin{lstlisting}[language=CSS]
+.container {
+    display: flex;
+    flex-direction: row;
+}
+\end{lstlisting}
+Nilai umum: \texttt{row} (horizontal), \texttt{column} (vertikal), \texttt{row-reverse} (horizontal terbalik), dan \texttt{column-reverse} (vertikal terbalik).
+\subsection{Mengatur posisi item}
+\textbf{justify-content} mengatur posisi atau distribusi item pada sumbu utama (\textit{main axis}).
+\begin{lstlisting}[language=CSS]
+.container {
+    display: flex;
+    justify-content: center;
+}
+\end{lstlisting}
+Nilai umum: \texttt{flex-start}, \texttt{flex-end}, \texttt{center}, \texttt{space-between}, \texttt{space-around}, dan \texttt{space-evenly}.
+\textbf{align-items} mengatur posisi item pada sumbu silang (\textit{cross axis}).
+\begin{lstlisting}[language=CSS]
+.container {
+    display: flex;
+    align-items: center;
+}
+\end{lstlisting}
+Sumbu utama mengikuti arah \texttt{flex-direction}. Jika arahnya \texttt{row}, sumbu utama horizontal; jika \texttt{column}, sumbu utama vertikal.
+\subsection{Mengatur jarak dengan gap}
+\begin{lstlisting}[language=CSS]
+.container {
+    display: flex;
+    gap: 20px;
+}
+\end{lstlisting}
+Properti \texttt{gap} memberikan jarak antar-item secara konsisten tanpa harus menambahkan margin satu per satu.
+\section{CSS Grid}
+CSS Grid cocok ketika susunan halaman membutuhkan baris dan kolom sekaligus. Contohnya galeri foto, daftar produk, dashboard, serta layout halaman dengan sidebar dan konten utama.
+\subsection{Mengaktifkan Grid}
+\begin{lstlisting}[language=CSS]
+.container {
+    display: grid;
+}
+\end{lstlisting}
+\subsection{Membuat kolom}
+\begin{lstlisting}[language=CSS]
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+\end{lstlisting}
+Kode tersebut membagi ruang container menjadi tiga kolom sama besar. Penulisan dapat diringkas dengan \texttt{repeat()}:
+\begin{lstlisting}[language=CSS]
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+\end{lstlisting}
+\texttt{1fr} berarti satu bagian dari ruang yang tersedia.
+\subsection{Mengatur jarak dan baris}
+\begin{lstlisting}[language=CSS]
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+\end{lstlisting}
+Untuk menentukan tinggi baris, gunakan \texttt{grid-template-rows}:
+\begin{lstlisting}[language=CSS]
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 100px 200px;
+}
+\end{lstlisting}
+Contoh tersebut membuat dua kolom dan dua baris dengan tinggi masing-masing 100px dan 200px.
+\section{Flexbox atau Grid?}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Kebutuhan} & \textbf{Pilihan yang sering sesuai}\\
+\midrule
+Navbar & Flexbox\\
+Menyejajarkan tombol & Flexbox\\
+Menu horizontal & Flexbox\\
+Galeri foto & Grid\\
+Daftar produk berbentuk kolom & Grid\\
+Dashboard dengan area baris dan kolom & Grid\\
+\bottomrule
+\end{tabular}
+\end{center}
+Flexbox dan Grid dapat digunakan bersama. Misalnya, Grid membagi halaman menjadi sidebar dan konten utama, sedangkan Flexbox menyusun tombol di dalam konten.
+\section{Praktik Langsung}
+Buat dua file dalam satu folder, yaitu \texttt{layout.html} dan \texttt{style.css}.
+\subsection{File layout.html}
+\begin{lstlisting}[language=HTML]
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar CSS Layout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <h2>DAWET</h2>
+        <nav>
+            <a href="#">Beranda</a>
+            <a href="#">Tentang</a>
+            <a href="#">Kontak</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Belajar CSS Grid</h1>
+        <section class="cards">
+            <div class="card">HTML</div>
+            <div class="card">CSS</div>
+            <div class="card">JavaScript</div>
+        </section>
+    </main>
+</body>
+</html>
+\end{lstlisting}
+\subsection{File style.css}
+\begin{lstlisting}[language=CSS]
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav {
+    display: flex;
+    gap: 20px;
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.card {
+    background: #eeeeee;
+    padding: 30px;
+    text-align: center;
+}
+\end{lstlisting}
+Amati hasilnya: navbar dan menu navigasi menggunakan Flexbox, sedangkan tiga kartu menggunakan Grid. Properti \texttt{gap} mengatur jarak antar-item.
+\section{Latihan Mandiri}
+\begin{enumerate}
+\item Ubah posisi menu navigasi agar berada di sebelah kiri.
+\item Buat empat kartu menggunakan Grid.
+\item Ubah jarak antarkartu menjadi 30px.
+\item Pastikan logo dan menu tetap sejajar secara vertikal.
+\item Ubah \texttt{flex-direction} dari \texttt{row} menjadi \texttt{column}, lalu amati perbedaannya.
+\end{enumerate}
+\section{Evaluasi Pemahaman}
+Jawab pertanyaan berikut menggunakan kalimat sendiri:
+\begin{enumerate}
+\item Apa perbedaan utama Flexbox dan CSS Grid?
+\item Apa fungsi container dan item?
+\item Apa perbedaan \texttt{justify-content} dan \texttt{align-items}?
+\item Mengapa Grid cocok untuk galeri foto atau daftar produk?
+\item Berikan satu contoh situasi ketika Flexbox dan Grid digunakan bersama.
+\end{enumerate}
+\section{Indikator Keberhasilan}
+\begin{itemize}
+\item Mampu menjelaskan perbedaan Flexbox dan Grid.
+\item Mampu menggunakan \texttt{display: flex} dan \texttt{display: grid}.
+\item Mampu menyusun navbar dan kartu sederhana.
+\item Mampu memodifikasi layout HTML yang sudah dibuat sebelumnya.
+\end{itemize}
+\section*{Penutup}
+Layout bukan sekadar membuat halaman terlihat menarik. Layout membantu mengatur hubungan antar-elemen dan penggunaan ruang di dalam halaman. Pada materi berikutnya, peserta akan mempelajari Responsive Web Design agar halaman tetap nyaman digunakan pada desktop maupun perangkat mobile.
+\begin{center}\textit{PROJECT DAWET -- FASE 1\\Learn. Build. Understand.}\end{center}
+\end{document}
