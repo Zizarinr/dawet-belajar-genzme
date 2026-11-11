@@ -1,0 +1,1662 @@
+```latex
+\documentclass[12pt,a4paper]{article}
+
+% ==================================================
+% PACKAGE
+% ==================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[indonesian]{babel}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+
+% ==================================================
+% PAGE CONFIGURATION
+% ==================================================
+\geometry{
+    left=3cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm
+}
+
+\setstretch{1.2}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ==================================================
+% COLOR
+% ==================================================
+\definecolor{dawetblue}{RGB}{25,55,95}
+\definecolor{codebg}{RGB}{245,247,250}
+\definecolor{codeborder}{RGB}{210,218,230}
+\definecolor{softblue}{RGB}{235,242,250}
+\definecolor{darkgray}{RGB}{55,65,75}
+\definecolor{warningyellow}{RGB}{255,247,220}
+\definecolor{successgreen}{RGB}{225,243,232}
+
+% ==================================================
+% HYPERLINK
+% ==================================================
+\hypersetup{
+    colorlinks=true,
+    linkcolor=dawetblue,
+    urlcolor=dawetblue,
+    citecolor=dawetblue
+}
+
+% ==================================================
+% SECTION STYLE
+% ==================================================
+\titleformat{\section}
+{\Large\bfseries\color{dawetblue}}
+{\thesection.}{0.6em}{}
+
+\titleformat{\subsection}
+{\large\bfseries\color{darkgray}}
+{\thesubsection}{0.6em}{}
+
+% ==================================================
+% CODE LISTING
+% ==================================================
+\lstdefinestyle{dawetcode}{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    frame=single,
+    rulecolor=\color{codeborder},
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    tabsize=2,
+    numbers=none,
+    xleftmargin=8pt,
+    xrightmargin=8pt,
+    aboveskip=8pt,
+    belowskip=8pt
+}
+
+\lstset{style=dawetcode}
+
+% ==================================================
+% HEADER & FOOTER
+% ==================================================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small PROJECT DAWET}
+\rhead{\small Minggu 8}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ==================================================
+% DOCUMENT
+% ==================================================
+\begin{document}
+
+% ==================================================
+% COVER
+% ==================================================
+\begin{titlepage}
+    \centering
+
+    \vspace*{2cm}
+
+    {\Large\bfseries PROJECT DAWET\par}
+
+    \vspace{1.5cm}
+
+    {\Huge\bfseries JavaScript Fundamentals\par}
+
+    \vspace{0.5cm}
+
+    {\Large Minggu 8 -- Assignment 2\par}
+
+    \vspace{1.5cm}
+
+    \begin{tcolorbox}[
+        colback=softblue,
+        colframe=dawetblue,
+        width=0.85\textwidth,
+        arc=2mm,
+        boxrule=0.8pt
+    ]
+        \centering
+        \textbf{Learning Focus}
+
+        Memahami dasar-dasar pemrograman JavaScript,
+        mulai dari variabel, tipe data, operator,
+        percabangan, perulangan, fungsi, array,
+        hingga object.
+    \end{tcolorbox}
+
+    \vfill
+
+    {\large Asynchronous Learning Program\par}
+
+    \vspace{0.3cm}
+
+    {\large Learn. Build. Understand.\par}
+
+    \vspace{1cm}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ==================================================
+\section{Pendahuluan}
+% ==================================================
+
+Pada materi sebelumnya, kita telah mempelajari HTML
+untuk membangun struktur halaman web dan CSS untuk
+mengatur tampilan serta tata letaknya.
+
+Namun, sebuah website tidak selalu cukup hanya
+memiliki struktur dan tampilan. Dalam banyak kasus,
+website juga membutuhkan kemampuan untuk merespons
+tindakan pengguna, memproses data, dan menjalankan
+logika tertentu.
+
+Contohnya:
+
+\begin{itemize}
+    \item Menghitung total harga produk.
+    \item Menampilkan pesan ketika tombol ditekan.
+    \item Memeriksa apakah formulir sudah diisi.
+    \item Menampilkan daftar produk berdasarkan data.
+    \item Menghitung jumlah barang yang dipilih pengguna.
+\end{itemize}
+
+Untuk membuat perilaku tersebut, kita membutuhkan
+JavaScript.
+
+JavaScript merupakan bahasa pemrograman yang banyak
+digunakan dalam pengembangan web. Pada sisi browser,
+JavaScript dapat digunakan untuk membuat halaman web
+menjadi interaktif.
+
+Dalam rangkaian materi Assignment 2, JavaScript juga
+akan menjadi dasar untuk mempelajari manipulasi DOM,
+pengolahan formulir, serta komunikasi dengan backend.
+
+\subsection{Tujuan Pembelajaran}
+
+Setelah menyelesaikan materi ini, peserta diharapkan
+mampu:
+
+\begin{enumerate}
+    \item Menjelaskan fungsi JavaScript dalam pengembangan web.
+    \item Menghubungkan file JavaScript dengan HTML.
+    \item Menggunakan variabel dan tipe data.
+    \item Menggunakan operator dalam ekspresi.
+    \item Membuat percabangan berdasarkan kondisi.
+    \item Menggunakan perulangan untuk memproses data.
+    \item Membuat dan memanggil fungsi.
+    \item Menggunakan array dan object sederhana.
+    \item Menyelesaikan permasalahan sederhana menggunakan
+    logika JavaScript.
+\end{enumerate}
+
+% ==================================================
+\section{Mengenal JavaScript}
+% ==================================================
+
+\subsection{Apa Itu JavaScript?}
+
+JavaScript adalah bahasa pemrograman yang digunakan
+untuk membuat aplikasi interaktif.
+
+Dalam pengembangan web, JavaScript dapat berjalan
+di browser pengguna dan berinteraksi dengan halaman
+HTML melalui Document Object Model (DOM).
+
+Contoh penerapannya:
+
+\begin{itemize}
+    \item Tombol yang menjalankan suatu aksi.
+    \item Formulir yang memeriksa input pengguna.
+    \item Menu navigasi interaktif.
+    \item Perhitungan harga secara otomatis.
+    \item Pengambilan dan penampilan data dari server.
+\end{itemize}
+
+JavaScript juga dapat digunakan di luar browser,
+misalnya melalui Node.js untuk membangun aplikasi
+backend.
+
+Namun, pada materi ini kita akan memulai dari
+penggunaan JavaScript di browser.
+
+\subsection{Hubungan HTML, CSS, dan JavaScript}
+
+Ketiganya memiliki peran yang berbeda, tetapi saling
+melengkapi dalam membangun sebuah website.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Teknologi} & \textbf{Peran Utama} \\
+\midrule
+HTML & Membentuk struktur dan konten halaman. \\
+CSS & Mengatur tampilan, warna, ukuran, dan tata letak. \\
+JavaScript & Menambahkan logika dan perilaku interaktif. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Sebagai contoh, sebuah tombol pada website dapat
+dibangun menggunakan HTML, diberi warna menggunakan
+CSS, kemudian diberi fungsi tertentu menggunakan
+JavaScript.
+
+\subsection{Cara Menambahkan JavaScript ke HTML}
+
+Terdapat beberapa cara untuk menggunakan JavaScript
+dalam dokumen HTML.
+
+\subsubsection{Inline JavaScript}
+
+JavaScript dapat ditulis langsung pada atribut HTML
+tertentu.
+
+Contoh:
+
+\begin{lstlisting}
+<button onclick="alert('Halo DAWET!')">
+    Klik Saya
+</button>
+\end{lstlisting}
+
+Cara ini mudah digunakan untuk demonstrasi sederhana,
+tetapi tidak disarankan untuk pengembangan proyek
+yang lebih terstruktur karena logika JavaScript
+tercampur dengan HTML.
+
+\subsubsection{Internal JavaScript}
+
+JavaScript dapat ditulis menggunakan elemen
+\texttt{<script>} di dalam file HTML.
+
+Contoh:
+
+\begin{lstlisting}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Belajar JavaScript</title>
+</head>
+<body>
+
+    <h1>Belajar JavaScript</h1>
+
+    <script>
+        console.log("Halo DAWET!");
+    </script>
+
+</body>
+</html>
+\end{lstlisting}
+
+\subsubsection{External JavaScript}
+
+Cara yang direkomendasikan untuk proyek yang
+memiliki banyak kode JavaScript adalah memisahkan
+kode ke dalam file tersendiri.
+
+Contoh struktur proyek:
+
+\begin{lstlisting}
+belajar-javascript/
+|
+|-- index.html
+|-- script.js
+\end{lstlisting}
+
+Isi file \texttt{index.html}:
+
+\begin{lstlisting}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Belajar JavaScript</title>
+</head>
+<body>
+
+    <h1>Belajar JavaScript</h1>
+
+    <script src="script.js"></script>
+</body>
+</html>
+\end{lstlisting}
+
+Isi file \texttt{script.js}:
+
+\begin{lstlisting}
+console.log("Halo DAWET!");
+\end{lstlisting}
+
+Atribut \texttt{src} digunakan untuk menentukan
+lokasi file JavaScript yang ingin dihubungkan.
+
+Pada contoh tersebut, file JavaScript berada
+dalam direktori yang sama dengan file HTML.
+
+Untuk proyek ini, kita akan menggunakan external
+JavaScript agar kode lebih terorganisasi.
+
+\subsection{Mengenal Console}
+
+Console merupakan fitur pada browser yang dapat
+digunakan untuk menampilkan informasi dan membantu
+proses debugging.
+
+Salah satu perintah yang sering digunakan adalah:
+
+\begin{lstlisting}
+console.log("Halo, dunia!");
+\end{lstlisting}
+
+Untuk membuka console di browser:
+
+\begin{enumerate}
+    \item Buka halaman HTML melalui browser.
+    \item Tekan tombol F12 atau klik kanan lalu pilih
+    \textit{Inspect}.
+    \item Pilih tab \textit{Console}.
+    \item Perhatikan keluaran dari perintah
+    \texttt{console.log()}.
+\end{enumerate}
+
+Console akan menjadi alat penting selama proses
+belajar JavaScript.
+
+% ==================================================
+\section{Variabel dan Tipe Data}
+% ==================================================
+
+\subsection{Apa Itu Variabel?}
+
+Variabel merupakan tempat untuk menyimpan nilai
+yang dapat digunakan kembali dalam program.
+
+Contohnya, sebuah website UMKM mungkin perlu
+menyimpan informasi nama produk, harga, dan jumlah
+stok.
+
+Dalam JavaScript, variabel dapat dibuat menggunakan
+kata kunci \texttt{let}, \texttt{const}, atau
+\texttt{var}.
+
+\subsection{Deklarasi Variabel}
+
+\textbf{1. let}
+
+Digunakan untuk membuat variabel yang nilainya
+dapat diubah.
+
+\begin{lstlisting}
+let namaProduk = "Kopi Lokal";
+
+namaProduk = "Kopi Susu";
+
+console.log(namaProduk);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+Kopi Susu
+\end{lstlisting}
+
+\textbf{2. const}
+
+Digunakan untuk membuat variabel yang tidak dapat
+diisi ulang melalui assignment setelah deklarasi.
+
+\begin{lstlisting}
+const namaToko = "DAWET Store";
+
+console.log(namaToko);
+\end{lstlisting}
+
+Contoh berikut akan menghasilkan error:
+
+\begin{lstlisting}
+const harga = 15000;
+harga = 20000;
+\end{lstlisting}
+
+Perlu diketahui bahwa \texttt{const} tidak selalu
+berarti seluruh isi objek atau array menjadi
+tidak dapat diubah. Yang tidak dapat diubah adalah
+pengikatan variabelnya ke nilai lain.
+
+\textbf{3. var}
+
+\texttt{var} merupakan cara deklarasi variabel
+yang digunakan pada JavaScript versi lama.
+
+\begin{lstlisting}
+var nama = "Budi";
+console.log(nama);
+\end{lstlisting}
+
+Pada pembelajaran ini, utamakan penggunaan
+\texttt{let} dan \texttt{const} karena keduanya
+memiliki aturan cakupan variabel yang lebih mudah
+dikelola untuk kode modern.
+
+\subsection{Aturan Penamaan Variabel}
+
+Beberapa aturan dasar penamaan variabel:
+
+\begin{itemize}
+    \item Nama variabel dapat menggunakan huruf,
+    angka, garis bawah, dan tanda dolar.
+    \item Nama variabel tidak boleh diawali angka.
+    \item Nama variabel tidak boleh menggunakan
+    kata kunci JavaScript.
+    \item JavaScript membedakan huruf besar dan kecil.
+\end{itemize}
+
+Contoh:
+
+\begin{lstlisting}
+let namaProduk = "Nasi Goreng";
+let hargaProduk = 15000;
+let jumlahStok = 20;
+\end{lstlisting}
+
+Gunakan nama yang menjelaskan isi variabel agar
+kode lebih mudah dibaca.
+
+\subsection{Tipe Data}
+
+Tipe data menjelaskan jenis nilai yang disimpan
+dalam sebuah variabel.
+
+Beberapa tipe data dasar JavaScript adalah:
+
+\textbf{1. String}
+
+Digunakan untuk menyimpan teks.
+
+\begin{lstlisting}
+let nama = "Kopi Susu";
+let kategori = 'Minuman';
+\end{lstlisting}
+
+\textbf{2. Number}
+
+Digunakan untuk menyimpan angka, baik bilangan
+bulat maupun desimal.
+
+\begin{lstlisting}
+let harga = 15000;
+let rating = 4.8;
+\end{lstlisting}
+
+\textbf{3. Boolean}
+
+Digunakan untuk menyimpan nilai logika
+\texttt{true} atau \texttt{false}.
+
+\begin{lstlisting}
+let tersedia = true;
+let sudahDibayar = false;
+\end{lstlisting}
+
+\textbf{4. Undefined}
+
+Menunjukkan variabel yang telah dideklarasikan,
+tetapi belum diberi nilai.
+
+\begin{lstlisting}
+let alamat;
+
+console.log(alamat);
+\end{lstlisting}
+
+\textbf{5. Null}
+
+Digunakan untuk menyatakan bahwa suatu nilai
+sengaja dikosongkan.
+
+\begin{lstlisting}
+let nomorTelepon = null;
+\end{lstlisting}
+
+\textbf{6. Object}
+
+Digunakan untuk mengelompokkan data dalam bentuk
+pasangan properti dan nilai.
+
+\begin{lstlisting}
+const produk = {
+    nama: "Kopi Susu",
+    harga: 15000,
+    tersedia: true
+};
+\end{lstlisting}
+
+\textbf{7. Array}
+
+Digunakan untuk menyimpan kumpulan nilai dalam
+satu variabel.
+
+\begin{lstlisting}
+const daftarProduk = [
+    "Kopi Susu",
+    "Teh Manis",
+    "Roti Bakar"
+];
+\end{lstlisting}
+
+\subsection{Memeriksa Tipe Data}
+
+Gunakan operator \texttt{typeof} untuk memeriksa
+tipe data suatu nilai.
+
+\begin{lstlisting}
+let nama = "DAWET";
+let harga = 15000;
+let aktif = true;
+
+console.log(typeof nama);
+console.log(typeof harga);
+console.log(typeof aktif);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+string
+number
+boolean
+\end{lstlisting}
+
+Perlu diperhatikan bahwa \texttt{typeof null}
+menghasilkan \texttt{"object"} karena perilaku
+historis JavaScript.
+
+% ==================================================
+\section{Operator dalam JavaScript}
+% ==================================================
+
+Operator digunakan untuk melakukan operasi terhadap
+nilai atau variabel.
+
+\subsection{Operator Aritmatika}
+
+Operator aritmatika digunakan untuk melakukan
+perhitungan matematika.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{cX}
+\toprule
+\textbf{Operator} & \textbf{Fungsi} \\
+\midrule
++ & Penjumlahan \\
+- & Pengurangan \\
+* & Perkalian \\
+/ & Pembagian \\
+\% & Sisa hasil bagi atau modulo \\
+** & Perpangkatan \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Contoh:
+
+\begin{lstlisting}
+let harga = 15000;
+let jumlah = 3;
+
+let total = harga * jumlah;
+
+console.log(total);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+45000
+\end{lstlisting}
+
+\subsection{Operator Perbandingan}
+
+Operator perbandingan digunakan untuk membandingkan
+dua nilai dan menghasilkan nilai Boolean.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{cX}
+\toprule
+\textbf{Operator} & \textbf{Fungsi} \\
+\midrule
+== & Membandingkan nilai dengan konversi tipe tertentu. \\
+=== & Membandingkan nilai dan tipe data. \\
+!= & Membandingkan ketidaksamaan nilai. \\
+!== & Membandingkan ketidaksamaan nilai atau tipe. \\
+> & Lebih besar dari. \\
+< & Lebih kecil dari. \\
+>= & Lebih besar atau sama dengan. \\
+<= & Lebih kecil atau sama dengan. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Contoh:
+
+\begin{lstlisting}
+let harga = 15000;
+
+console.log(harga > 10000);
+console.log(harga === 15000);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+true
+true
+\end{lstlisting}
+
+Dalam praktik sehari-hari, gunakan
+\texttt{===} dan \texttt{!==} sebagai pilihan
+utama agar perbandingan lebih ketat dan mudah
+diprediksi.
+
+\subsection{Operator Logika}
+
+Operator logika digunakan untuk menggabungkan
+atau membalikkan kondisi.
+
+\begin{center}
+\begin{tabularx}{\textwidth}{cX}
+\toprule
+\textbf{Operator} & \textbf{Fungsi} \\
+\midrule
+\&\& & AND: semua kondisi harus bernilai benar. \\
+|| & OR: minimal satu kondisi harus benar. \\
+! & NOT: membalikkan nilai logika. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Contoh AND:
+
+\begin{lstlisting}
+let stok = 10;
+let aktif = true;
+
+console.log(stok > 0 && aktif);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+true
+\end{lstlisting}
+
+Contoh OR:
+
+\begin{lstlisting}
+let metodePembayaran = "transfer";
+
+console.log(
+    metodePembayaran === "transfer" ||
+    metodePembayaran === "tunai"
+);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+true
+\end{lstlisting}
+
+Contoh NOT:
+
+\begin{lstlisting}
+let tersedia = true;
+
+console.log(!tersedia);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+false
+\end{lstlisting}
+
+% ==================================================
+\section{Percabangan}
+% ==================================================
+
+\subsection{Apa Itu Percabangan?}
+
+Percabangan adalah mekanisme yang memungkinkan
+program mengambil keputusan berdasarkan kondisi
+tertentu.
+
+Sebagai contoh, sebuah sistem UMKM dapat menentukan
+apakah suatu produk masih tersedia berdasarkan
+jumlah stoknya.
+
+\subsection{if}
+
+Struktur \texttt{if} menjalankan kode ketika
+kondisi bernilai benar.
+
+\begin{lstlisting}
+let stok = 10;
+
+if (stok > 0) {
+    console.log("Produk tersedia");
+}
+\end{lstlisting}
+
+Karena stok lebih besar dari nol, pesan
+\texttt{Produk tersedia} akan ditampilkan.
+
+\subsection{if dan else}
+
+Tambahkan \texttt{else} jika program perlu
+menjalankan alternatif ketika kondisi salah.
+
+\begin{lstlisting}
+let stok = 0;
+
+if (stok > 0) {
+    console.log("Produk tersedia");
+} else {
+    console.log("Produk habis");
+}
+\end{lstlisting}
+
+\subsection{if, else if, dan else}
+
+Struktur ini digunakan ketika terdapat beberapa
+kemungkinan kondisi.
+
+\begin{lstlisting}
+let totalBelanja = 75000;
+
+if (totalBelanja >= 100000) {
+    console.log("Diskon 20%");
+} else if (totalBelanja >= 50000) {
+    console.log("Diskon 10%");
+} else {
+    console.log("Tidak ada diskon");
+}
+\end{lstlisting}
+
+Program akan memeriksa kondisi dari atas ke bawah.
+Ketika suatu kondisi terpenuhi, blok yang sesuai
+dijalankan dan rangkaian percabangan tersebut
+selesai.
+
+\subsection{switch}
+
+\texttt{switch} dapat digunakan ketika kita ingin
+memeriksa satu nilai terhadap beberapa kemungkinan
+nilai yang berbeda.
+
+\begin{lstlisting}
+let kategori = "minuman";
+
+switch (kategori) {
+    case "makanan":
+        console.log("Kategori makanan");
+        break;
+
+    case "minuman":
+        console.log("Kategori minuman");
+        break;
+
+    case "camilan":
+        console.log("Kategori camilan");
+        break;
+
+    default:
+        console.log("Kategori tidak dikenal");
+}
+\end{lstlisting}
+
+Perintah \texttt{break} digunakan untuk menghentikan
+eksekusi pada case yang telah cocok agar program
+tidak melanjutkan ke case berikutnya.
+
+\texttt{default} dijalankan jika tidak ada case
+yang cocok.
+
+% ==================================================
+\section{Perulangan}
+% ==================================================
+
+\subsection{Apa Itu Perulangan?}
+
+Perulangan atau loop digunakan untuk menjalankan
+blok kode berulang kali.
+
+Misalnya, kita ingin menampilkan daftar sepuluh
+produk. Daripada menulis perintah yang sama
+sepuluh kali, kita dapat menggunakan perulangan.
+
+\subsection{for}
+
+Perulangan \texttt{for} biasanya digunakan ketika
+jumlah pengulangan diketahui atau dapat ditentukan.
+
+Struktur dasarnya:
+
+\begin{lstlisting}
+for (inisialisasi; kondisi; perubahan) {
+    // kode yang dijalankan
+}
+\end{lstlisting}
+
+Contoh:
+
+\begin{lstlisting}
+for (let i = 1; i <= 5; i++) {
+    console.log("Produk ke-" + i);
+}
+\end{lstlisting}
+
+Penjelasan:
+
+\begin{itemize}
+    \item \texttt{let i = 1}: nilai awal penghitung.
+    \item \texttt{i <= 5}: perulangan berjalan selama
+    kondisi benar.
+    \item \texttt{i++}: menaikkan nilai penghitung
+    sebanyak satu pada setiap putaran.
+\end{itemize}
+
+\subsection{while}
+
+Perulangan \texttt{while} menjalankan kode selama
+kondisi bernilai benar.
+
+\begin{lstlisting}
+let stok = 3;
+
+while (stok > 0) {
+    console.log("Stok tersisa: " + stok);
+    stok--;
+}
+\end{lstlisting}
+
+Perulangan berhenti ketika nilai \texttt{stok}
+tidak lagi lebih besar dari nol.
+
+\begin{tcolorbox}[
+    colback=warningyellow,
+    colframe=orange!70!black,
+    title=\textbf{Perhatian: Infinite Loop}
+]
+Pastikan kondisi perulangan dapat berubah sehingga
+pada akhirnya menjadi salah.
+
+Jika kondisi selalu benar dan tidak ada mekanisme
+penghentian, program dapat mengalami infinite loop,
+yaitu perulangan yang tidak pernah selesai.
+\end{tcolorbox}
+
+\subsection{break dan continue}
+
+\texttt{break} digunakan untuk menghentikan
+perulangan secara langsung.
+
+\begin{lstlisting}
+for (let i = 1; i <= 5; i++) {
+    if (i === 3) {
+        break;
+    }
+
+    console.log(i);
+}
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+1
+2
+\end{lstlisting}
+
+Sementara itu, \texttt{continue} digunakan untuk
+melewati satu putaran dan melanjutkan ke putaran
+berikutnya.
+
+\begin{lstlisting}
+for (let i = 1; i <= 5; i++) {
+    if (i === 3) {
+        continue;
+    }
+
+    console.log(i);
+}
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+1
+2
+4
+5
+\end{lstlisting}
+
+% ==================================================
+\section{Fungsi}
+% ==================================================
+
+\subsection{Apa Itu Fungsi?}
+
+Fungsi adalah blok kode yang dirancang untuk
+menjalankan tugas tertentu dan dapat dipanggil
+kembali ketika dibutuhkan.
+
+Fungsi membantu kita menghindari penulisan kode
+yang sama secara berulang.
+
+Sebagai contoh, jika kita sering menghitung total
+harga produk, kita dapat membuat satu fungsi
+untuk menangani perhitungan tersebut.
+
+\subsection{Membuat Function Declaration}
+
+Contoh:
+
+\begin{lstlisting}
+function sapa() {
+    console.log("Halo, selamat datang!");
+}
+\end{lstlisting}
+
+Kode di atas hanya mendefinisikan fungsi.
+Agar dijalankan, kita perlu memanggilnya:
+
+\begin{lstlisting}
+sapa();
+\end{lstlisting}
+
+\subsection{Parameter dan Argument}
+
+Fungsi dapat menerima data melalui parameter.
+
+\begin{lstlisting}
+function sapa(nama) {
+    console.log("Halo, " + nama);
+}
+
+sapa("Budi");
+\end{lstlisting}
+
+Pada contoh tersebut:
+
+\begin{itemize}
+    \item \texttt{nama} adalah parameter.
+    \item \texttt{"Budi"} adalah argument yang dikirim
+    ketika fungsi dipanggil.
+\end{itemize}
+
+\subsection{return}
+
+Fungsi dapat menghasilkan nilai menggunakan
+perintah \texttt{return}.
+
+\begin{lstlisting}
+function hitungTotal(harga, jumlah) {
+    return harga * jumlah;
+}
+
+let total = hitungTotal(15000, 3);
+
+console.log(total);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+45000
+\end{lstlisting}
+
+Perbedaan penting:
+
+\begin{itemize}
+    \item \texttt{console.log()} menampilkan informasi
+    pada console.
+    \item \texttt{return} mengembalikan nilai dari fungsi
+    kepada bagian program yang memanggilnya.
+\end{itemize}
+
+\subsection{Function Expression}
+
+Fungsi juga dapat disimpan ke dalam variabel.
+
+\begin{lstlisting}
+const hitungLuas = function(panjang, lebar) {
+    return panjang * lebar;
+};
+
+console.log(hitungLuas(5, 4));
+\end{lstlisting}
+
+\subsection{Arrow Function}
+
+JavaScript modern menyediakan bentuk penulisan
+fungsi yang disebut arrow function.
+
+\begin{lstlisting}
+const hitungTotal = (harga, jumlah) => {
+    return harga * jumlah;
+};
+
+console.log(hitungTotal(15000, 3));
+\end{lstlisting}
+
+Untuk fungsi dengan satu ekspresi sederhana,
+penulisannya dapat dibuat lebih singkat:
+
+\begin{lstlisting}
+const tambah = (a, b) => a + b;
+
+console.log(tambah(5, 3));
+\end{lstlisting}
+
+Pada tahap awal, peserta cukup memahami cara
+mendefinisikan fungsi, memberikan parameter,
+memanggil fungsi, dan mengembalikan nilai.
+
+% ==================================================
+\section{Array}
+% ==================================================
+
+\subsection{Apa Itu Array?}
+
+Array adalah struktur data yang digunakan untuk
+menyimpan kumpulan nilai dalam satu variabel.
+
+Contoh:
+
+\begin{lstlisting}
+const produk = [
+    "Kopi Susu",
+    "Teh Manis",
+    "Roti Bakar"
+];
+\end{lstlisting}
+
+Setiap nilai di dalam array memiliki posisi
+yang disebut index.
+
+Index array JavaScript dimulai dari angka nol.
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+\toprule
+Index & 0 & 1 & 2 \\
+\midrule
+Nilai & Kopi Susu & Teh Manis & Roti Bakar \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Mengakses Elemen Array}
+
+Gunakan index untuk mengambil elemen tertentu.
+
+\begin{lstlisting}
+const produk = [
+    "Kopi Susu",
+    "Teh Manis",
+    "Roti Bakar"
+];
+
+console.log(produk[0]);
+console.log(produk[1]);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+Kopi Susu
+Teh Manis
+\end{lstlisting}
+
+\subsection{Mengubah Elemen Array}
+
+Elemen array dapat diubah melalui index.
+
+\begin{lstlisting}
+const produk = [
+    "Kopi Susu",
+    "Teh Manis"
+];
+
+produk[1] = "Es Teh";
+
+console.log(produk);
+\end{lstlisting}
+
+Meskipun menggunakan \texttt{const}, elemen
+array tetap dapat diubah. Yang tidak dapat
+diubah adalah pengikatan variabel \texttt{produk}
+ke array lain.
+
+\subsection{Properti length}
+
+Properti \texttt{length} digunakan untuk mengetahui
+jumlah elemen dalam array.
+
+\begin{lstlisting}
+const produk = [
+    "Kopi Susu",
+    "Teh Manis",
+    "Roti Bakar"
+];
+
+console.log(produk.length);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+3
+\end{lstlisting}
+
+\subsection{Method Dasar Array}
+
+Beberapa method yang umum digunakan:
+
+\begin{center}
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{Method} & \textbf{Fungsi} \\
+\midrule
+push() & Menambahkan elemen di akhir array. \\
+pop() & Menghapus elemen terakhir. \\
+unshift() & Menambahkan elemen di awal array. \\
+shift() & Menghapus elemen pertama. \\
+includes() & Memeriksa apakah nilai terdapat dalam array. \\
+indexOf() & Mencari posisi pertama suatu nilai. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Contoh:
+
+\begin{lstlisting}
+const produk = ["Kopi", "Teh"];
+
+produk.push("Roti");
+
+console.log(produk);
+\end{lstlisting}
+
+Hasil:
+
+\begin{lstlisting}
+["Kopi", "Teh", "Roti"]
+\end{lstlisting}
+
+\subsection{Menggunakan Perulangan pada Array}
+
+Array dapat diproses menggunakan perulangan.
+
+\begin{lstlisting}
+const produk = [
+    "Kopi Susu",
+    "Teh Manis",
+    "Roti Bakar"
+];
+
+for (let i = 0; i < produk.length; i++) {
+    console.log(produk[i]);
+}
+\end{lstlisting}
+
+Kita juga dapat menggunakan \texttt{for...of}
+untuk membaca setiap nilai array.
+
+\begin{lstlisting}
+for (const namaProduk of produk) {
+    console.log(namaProduk);
+}
+\end{lstlisting}
+
+% ==================================================
+\section{Object}
+% ==================================================
+
+\subsection{Apa Itu Object?}
+
+Object merupakan struktur data yang digunakan
+untuk menyimpan kumpulan informasi dalam bentuk
+pasangan key dan value.
+
+Sebagai contoh, sebuah produk UMKM memiliki
+nama, harga, kategori, dan status ketersediaan.
+
+Informasi tersebut dapat dikelompokkan dalam
+satu object.
+
+\begin{lstlisting}
+const produk = {
+    nama: "Kopi Susu",
+    harga: 15000,
+    kategori: "Minuman",
+    tersedia: true
+};
+\end{lstlisting}
+
+Pada contoh tersebut:
+
+\begin{itemize}
+    \item \texttt{nama} adalah key dengan nilai
+    \texttt{"Kopi Susu"}.
+    \item \texttt{harga} adalah key dengan nilai
+    \texttt{15000}.
+    \item \texttt{kategori} adalah key dengan nilai
+    \texttt{"Minuman"}.
+    \item \texttt{tersedia} adalah key dengan nilai
+    \texttt{true}.
+\end{itemize}
+
+\subsection{Mengakses Properti Object}
+
+Terdapat dua cara umum untuk mengakses properti
+object.
+
+Menggunakan dot notation:
+
+\begin{lstlisting}
+console.log(produk.nama);
+console.log(produk.harga);
+\end{lstlisting}
+
+Menggunakan bracket notation:
+
+\begin{lstlisting}
+console.log(produk["kategori"]);
+\end{lstlisting}
+
+\subsection{Mengubah Properti Object}
+
+Properti object dapat diubah atau ditambahkan.
+
+\begin{lstlisting}
+const produk = {
+    nama: "Kopi Susu",
+    harga: 15000
+};
+
+produk.harga = 18000;
+produk.stok = 20;
+
+console.log(produk);
+\end{lstlisting}
+
+\subsection{Array of Objects}
+
+Dalam aplikasi nyata, data biasanya tidak hanya
+terdiri dari satu object.
+
+Kita dapat menggabungkan array dan object untuk
+menyimpan banyak data produk.
+
+\begin{lstlisting}
+const daftarProduk = [
+    {
+        nama: "Kopi Susu",
+        harga: 15000
+    },
+    {
+        nama: "Teh Manis",
+        harga: 8000
+    },
+    {
+        nama: "Roti Bakar",
+        harga: 12000
+    }
+];
+\end{lstlisting}
+
+Untuk mengakses nama produk pertama:
+
+\begin{lstlisting}
+console.log(daftarProduk[0].nama);
+\end{lstlisting}
+
+Untuk menampilkan seluruh produk:
+
+\begin{lstlisting}
+for (const produk of daftarProduk) {
+    console.log(produk.nama);
+}
+\end{lstlisting}
+
+Konsep array of objects akan sering digunakan
+ketika kita mulai mengolah data produk pada
+proyek website UMKM.
+
+% ==================================================
+\section{Praktik Terpadu}
+% ==================================================
+
+Pada bagian ini, kita akan menggabungkan beberapa
+konsep yang telah dipelajari ke dalam satu program
+sederhana.
+
+\subsection{Studi Kasus: Sistem Perhitungan Belanja}
+
+Buat sebuah file bernama \texttt{script.js}.
+
+Program akan menyimpan beberapa data produk,
+menghitung total harga, dan memberikan informasi
+berdasarkan jumlah belanja.
+
+\begin{lstlisting}
+const daftarProduk = [
+    {
+        nama: "Kopi Susu",
+        harga: 15000,
+        jumlah: 2
+    },
+    {
+        nama: "Roti Bakar",
+        harga: 12000,
+        jumlah: 1
+    },
+    {
+        nama: "Teh Manis",
+        harga: 8000,
+        jumlah: 3
+    }
+];
+
+function hitungTotal(harga, jumlah) {
+    return harga * jumlah;
+}
+
+let totalBelanja = 0;
+
+console.log("DAFTAR BELANJA");
+
+for (const produk of daftarProduk) {
+    const subtotal = hitungTotal(
+        produk.harga,
+        produk.jumlah
+    );
+
+    totalBelanja += subtotal;
+
+    console.log(
+        produk.nama + ": Rp" + subtotal
+    );
+}
+
+console.log("----------------");
+
+console.log(
+    "Total: Rp" + totalBelanja
+);
+
+if (totalBelanja >= 50000) {
+    console.log("Selamat, Anda mendapat diskon!");
+} else {
+    console.log("Belum memenuhi syarat diskon.");
+}
+\end{lstlisting}
+
+\subsection{Analisis Program}
+
+Program tersebut menggabungkan beberapa konsep:
+
+\begin{enumerate}
+    \item \textbf{Array of Objects}: menyimpan beberapa
+    data produk.
+    \item \textbf{Function}: menghitung subtotal
+    berdasarkan harga dan jumlah.
+    \item \textbf{Perulangan}: memproses setiap produk
+    secara berurutan.
+    \item \textbf{Variabel}: menyimpan total belanja.
+    \item \textbf{Operator}: melakukan perhitungan.
+    \item \textbf{Percabangan}: menentukan apakah
+    pelanggan memperoleh diskon.
+\end{enumerate}
+
+Jalankan program melalui browser dengan menghubungkan
+file JavaScript ke HTML, kemudian buka tab Console
+untuk melihat hasilnya.
+
+% ==================================================
+\section{Latihan Mandiri}
+% ==================================================
+
+Kerjakan latihan berikut untuk menguji pemahaman
+terhadap materi.
+
+\subsection{Latihan 1: Variabel dan Operator}
+
+Buat variabel berikut:
+
+\begin{itemize}
+    \item Nama toko.
+    \item Nama produk.
+    \item Harga produk.
+    \item Jumlah produk.
+\end{itemize}
+
+Hitung total harga menggunakan operator aritmatika
+dan tampilkan hasilnya menggunakan
+\texttt{console.log()}.
+
+\subsection{Latihan 2: Percabangan}
+
+Buat variabel \texttt{stok} dengan nilai tertentu.
+
+Gunakan percabangan untuk menentukan pesan:
+
+\begin{itemize}
+    \item Jika stok lebih dari nol, tampilkan
+    \texttt{Produk tersedia}.
+    \item Jika stok sama dengan nol, tampilkan
+    \texttt{Produk habis}.
+    \item Jika stok kurang dari nol, tampilkan
+    \texttt{Data stok tidak valid}.
+\end{itemize}
+
+\subsection{Latihan 3: Perulangan}
+
+Buat array yang berisi minimal lima nama produk.
+
+Gunakan perulangan untuk menampilkan seluruh
+nama produk ke console.
+
+\subsection{Latihan 4: Fungsi}
+
+Buat fungsi bernama \texttt{hitungDiskon()}.
+
+Fungsi menerima dua parameter:
+
+\begin{itemize}
+    \item Harga awal.
+    \item Persentase diskon.
+\end{itemize}
+
+Fungsi harus mengembalikan harga setelah diskon.
+
+Contoh:
+
+\begin{lstlisting}
+hitungDiskon(100000, 10);
+\end{lstlisting}
+
+Hasil yang diharapkan:
+
+\begin{lstlisting}
+90000
+\end{lstlisting}
+
+\subsection{Latihan 5: Object dan Array}
+
+Buat array bernama \texttt{daftarProduk} yang
+berisi minimal tiga object produk.
+
+Setiap object harus memiliki:
+
+\begin{itemize}
+    \item nama
+    \item harga
+    \item stok
+\end{itemize}
+
+Kemudian:
+
+\begin{enumerate}
+    \item Tampilkan seluruh nama produk.
+    \item Tampilkan harga setiap produk.
+    \item Hitung jumlah seluruh stok.
+    \item Tampilkan produk yang stoknya lebih dari nol.
+\end{enumerate}
+
+% ==================================================
+\section{Evaluasi Pemahaman}
+% ==================================================
+
+Jawablah pertanyaan berikut menggunakan pemahaman
+sendiri. Peserta tidak cukup hanya menyalin kode
+dari materi.
+
+\begin{enumerate}
+    \item Apa perbedaan penggunaan \texttt{let}
+    dan \texttt{const}?
+
+    \item Apa perbedaan tipe data String, Number,
+    dan Boolean?
+
+    \item Mengapa operator \texttt{===} lebih
+    disarankan daripada \texttt{==}?
+
+    \item Kapan kita menggunakan percabangan
+    \texttt{if-else}?
+
+    \item Apa perbedaan perulangan \texttt{for}
+    dan \texttt{while}?
+
+    \item Apa perbedaan parameter dan argument
+    dalam sebuah fungsi?
+
+    \item Mengapa array menggunakan index yang
+    dimulai dari nol?
+
+    \item Apa perbedaan array dan object?
+
+    \item Mengapa array of objects berguna untuk
+    menyimpan data produk?
+
+    \item Jelaskan bagaimana program perhitungan
+    belanja pada materi ini bekerja.
+\end{enumerate}
+
+% ==================================================
+\section{Kriteria Penyelesaian}
+% ==================================================
+
+Peserta dinyatakan telah menyelesaikan materi ini
+apabila mampu:
+
+\begin{itemize}[label=$\square$]
+    \item Membuat file JavaScript eksternal dan
+    menghubungkannya dengan HTML.
+    \item Menggunakan console untuk melihat hasil
+    program dan membantu debugging.
+    \item Membuat serta menggunakan variabel.
+    \item Memahami tipe data dasar.
+    \item Menggunakan operator aritmatika,
+    perbandingan, dan logika.
+    \item Membuat percabangan.
+    \item Menggunakan perulangan.
+    \item Membuat fungsi dengan parameter dan return.
+    \item Mengolah array dan object sederhana.
+    \item Menyelesaikan latihan tanpa hanya menyalin
+    contoh dari materi.
+\end{itemize}
+
+% ==================================================
+\section{Penutup}
+% ==================================================
+
+JavaScript memberikan kemampuan kepada sebuah
+website untuk menjalankan logika dan merespons
+kebutuhan pengguna.
+
+Pada materi ini, kita telah mempelajari fondasi
+pemrograman yang akan digunakan kembali dalam
+materi-materi berikutnya.
+
+Variabel membantu menyimpan data, operator
+memproses nilai, percabangan mengambil keputusan,
+perulangan mengerjakan tugas berulang, sedangkan
+fungsi membantu menyusun kode agar lebih terstruktur.
+
+Array dan object kemudian memberikan cara untuk
+mengelola kumpulan data yang lebih kompleks.
+
+Konsep-konsep tersebut merupakan fondasi penting
+sebelum kita mempelajari bagaimana JavaScript
+berinteraksi langsung dengan elemen HTML melalui
+DOM.
+
+Ingat, memahami logika lebih penting daripada
+sekadar menghafal sintaks.
+
+\begin{center}
+    \vspace{0.5cm}
+    \textbf{\Large Learn. Build. Understand.}
+
+    \vspace{0.2cm}
+    \textit{PROJECT DAWET}
+\end{center}
+
+% ==================================================
+\section*{Referensi Pembelajaran}
+% ==================================================
+
+Gunakan dokumentasi berikut sebagai referensi
+tambahan:
+
+\begin{enumerate}
+    \item MDN Web Docs -- JavaScript:
+    \url{https://developer.mozilla.org/en-US/docs/Web/JavaScript}
+
+    \item MDN -- JavaScript First Steps:
+    \url{https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting}
+
+    \item MDN -- JavaScript Guide:
+    \url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide}
+
+    \item JavaScript.info:
+    \url{https://javascript.info/}
+\end{enumerate}
+
+\end{document}
+```
